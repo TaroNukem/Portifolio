@@ -1,0 +1,205 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Rolando</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<video class="video-background" autoplay muted loop playsinline>
+    <source th:src="@{/videos/fundo.mp4}" type="video/mp4">
+</video>
+
+<div class="fundo-escuro"></div>
+
+<div class="perfil">
+
+    <div class="esquerda">
+
+        <div class="card bio-foto">
+
+            <img th:src="@{/images/fotoPerfil.jpg}" alt="Foto de perfil">
+
+            <div class="info">
+
+                <h1>Daniel Rolando</h1>
+
+                <h3>
+                    Graduando em Engenharia de Software na PUC Minas |
+                    Desenvolvimento Web | Java, Spring Boot, Python, HTML,
+                    CSS, Git
+                </h3>
+
+                <h5>Belo Horizonte, Minas Gerais</h5>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    A alias inventore mollitia neque non, quisquam sequi.
+                    Ad aspernatur, consectetur deleniti eius ex fuga labore
+                    libero nam ratione reiciendis vitae voluptatibus.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="card languages">
+
+            <h2>Languages</h2>
+
+            <div class="wakatime">
+                <a href="https://nice-readme.vercel.app/wakatime"
+                   target="_blank"
+                   rel="noopener noreferrer">
+
+                    <img
+                            src="https://helio-github-stats.vercel.app/api/wakatime?username=b860e6a6-2e86-4589-9069-df3ceeda98b1&card_width=650&line_height=30&layout=default&display_format=time&hide_title=true&langs_count=6&theme=dark&bg_color=000000"
+                            alt="WakaTime Stats">
+
+                </a>
+            </div>
+
+        </div>
+
+        <div class="card projetos">
+
+            <h2>PROJECTS</h2>
+
+            <h3>Projeto 1</h3>
+            <p>Descrição do projeto.</p>
+
+            <h3>Projeto 2</h3>
+            <p>Descrição do projeto.</p>
+
+        </div>
+
+        <div class="card skills">
+
+            <h2>SKILLS</h2>
+
+            <p>Java</p>
+            <p>Spring Boot</p>
+            <p>Python</p>
+            <p>HTML</p>
+            <p>CSS</p>
+            <p>Git</p>
+
+        </div>
+
+    </div>
+
+    <div class="direita">
+
+        <div class="card developer">
+            <div class="logoPUC">
+            <img th:src="@{/images/pucMinas.png}" alt="Puc Minas">
+            </div>
+            <h1>2º Semestre</h1>
+
+            <p>Software Engineering Student</p>
+
+        </div>
+
+        <div class="card stats">
+
+            <h2>STATS</h2>
+
+            <div class="stat">
+                <span>Repositories</span>
+                <strong th:text="${github.public_repos}">0</strong>
+            </div>
+
+            <div class="stat">
+                <span>Followers</span>
+                <strong th:text="${github.followers}">0</strong>
+            </div>
+
+            <div class="top-languages">
+
+                <a href="https://nice-readme.vercel.app/top-langs"
+                   target="_blank"
+                   rel="noopener noreferrer">
+
+                    <img
+                            src="https://helio-github-stats.vercel.app/api/top-langs?username=TaroNukem&layout=pie&stats_format=percentages&theme=dark&hide_border=true&border_radius=5&card_width=466&locale=pt-br&hide_title=true&langs_count=10&size_weight=1"
+                            alt="Top Languages"
+                            loading="lazy">
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="card contato">
+
+            <h2>CONNECT WITH ME</h2>
+
+            <div class="contato-followers">
+                <strong th:text="${github.followers}">0</strong>
+                <span>GITHUB FOLLOWERS</span>
+            </div>
+
+            <div class="contato-links">
+
+                <a href="https://github.com/TaroNukem"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="contato-botao">
+                    GitHub
+                </a>
+
+                <a href="https://www.linkedin.com/in/daniel-rolando-22061137a"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="contato-botao">
+                    LinkedIn
+                </a>
+
+                <a href="mailto:danielgomesrolando@gmail.com"
+                   class="contato-botao">
+                    Email
+                </a>
+
+                <a th:href="@{/files/curriculo.pdf}"
+                   target="_blank"
+                   class="contato-botao">
+                    Currículo
+                </a>
+
+            </div>
+
+            <div class="contato-info">
+
+                <p>
+                    <strong>Email:</strong>
+                    <a href="mailto:danielgomesrolando@gmail.com">
+                        danielgomesrolando@gmail.com
+                    </a>
+                </p>
+
+                <p>
+                    <strong>Phone</strong>
+                    <span>(+55) 31 98539-5309</span>
+                </p>
+
+                <p>
+                    <strong>Location:</strong>
+                    <span>Belo Horizonte, MG</span>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
