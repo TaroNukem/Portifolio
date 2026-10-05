@@ -4,8 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Daniel Rolando</title>
+
     <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
@@ -34,13 +39,19 @@
                     CSS, Git
                 </h3>
 
-                <h5>Belo Horizonte, Minas Gerais</h5>
+                <h5>
+                    <i class="fa-solid fa-location-dot"></i>
+                    Belo Horizonte, Minas Gerais
+                </h5>
 
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    A alias inventore mollitia neque non, quisquam sequi.
-                    Ad aspernatur, consectetur deleniti eius ex fuga labore
-                    libero nam ratione reiciendis vitae voluptatibus.
+                    Sou estudante de Engenharia de Software e estou no começo da minha
+                    jornada como desenvolvedor. Gosto de aprender coisas novas, criar
+                    projetos e entender melhor como as tecnologias funcionam.
+
+                    Fora da programação, curto jogos, música e basquete. Gosto de todo
+                    tipo de música, gosto bastante de Metal Gear, o Kojima é um gênio
+                    e recentemente comecei a aprender violão.
                 </p>
 
             </div>
@@ -49,9 +60,13 @@
 
         <div class="card languages">
 
-            <h2>Languages</h2>
+            <h2>
+                <i class="fa-solid fa-code"></i>
+                Languages
+            </h2>
 
             <div class="wakatime">
+
                 <a href="https://nice-readme.vercel.app/wakatime"
                    target="_blank"
                    rel="noopener noreferrer">
@@ -61,13 +76,17 @@
                             alt="WakaTime Stats">
 
                 </a>
+
             </div>
 
         </div>
 
         <div class="card projetos">
 
-            <h2>PROJECTS</h2>
+            <h2>
+                <i class="fa-solid fa-folder-open"></i>
+                PROJECTS
+            </h2>
 
             <h3>Projeto 1</h3>
             <p>Descrição do projeto.</p>
@@ -79,7 +98,10 @@
 
         <div class="card skills">
 
-            <h2>SKILLS</h2>
+            <h2>
+                <i class="fa-solid fa-code"></i>
+                SKILLS
+            </h2>
 
             <p>Java</p>
             <p>Spring Boot</p>
@@ -95,27 +117,50 @@
     <div class="direita">
 
         <div class="card developer">
+
             <div class="logoPUC">
-            <img th:src="@{/images/pucMinas.png}" alt="Puc Minas">
+                <img th:src="@{/images/pucMinas.png}" alt="Puc Minas">
             </div>
+
             <h1>2º Semestre</h1>
 
-            <p>Software Engineering Student</p>
+            <p>Estudante de Engenharia de Software</p>
 
         </div>
 
         <div class="card stats">
 
-            <h2>STATS</h2>
+            <h2>GITHUB STATS</h2>
 
             <div class="stat">
-                <span>Repositories</span>
+
+                <span>
+                    <i class="fa-solid fa-book-bookmark"></i>
+                    Repositories
+                </span>
+
                 <strong th:text="${github.public_repos}">0</strong>
+
             </div>
 
             <div class="stat">
-                <span>Followers</span>
+
+                <span>
+                    <i class="fa-solid fa-users"></i>
+                    Followers
+                </span>
+
                 <strong th:text="${github.followers}">0</strong>
+
+            </div>
+
+            <div class="stat">
+
+                <span>
+                    <i class="fa-solid fa-code"></i>
+                    Top Languages
+                </span>
+
             </div>
 
             <div class="top-languages">
@@ -140,8 +185,13 @@
             <h2>CONNECT WITH ME</h2>
 
             <div class="contato-followers">
+
+                <i class="fa-solid fa-users contato-followers-icon"></i>
+
                 <strong th:text="${github.followers}">0</strong>
+
                 <span>GITHUB FOLLOWERS</span>
+
             </div>
 
             <div class="contato-links">
@@ -150,25 +200,37 @@
                    target="_blank"
                    rel="noopener noreferrer"
                    class="contato-botao">
+
+                    <i class="fa-brands fa-github"></i>
                     GitHub
+
                 </a>
 
                 <a href="https://www.linkedin.com/in/daniel-rolando-22061137a"
                    target="_blank"
                    rel="noopener noreferrer"
                    class="contato-botao">
+
+                    <i class="fa-brands fa-linkedin"></i>
                     LinkedIn
+
                 </a>
 
                 <a href="mailto:danielgomesrolando@gmail.com"
                    class="contato-botao">
+
+                    <i class="fa-solid fa-envelope"></i>
                     Email
+
                 </a>
 
                 <a th:href="@{/files/curriculo.pdf}"
                    target="_blank"
                    class="contato-botao">
+
+                    <i class="fa-solid fa-file-lines"></i>
                     Currículo
+
                 </a>
 
             </div>
@@ -176,19 +238,28 @@
             <div class="contato-info">
 
                 <p>
+                    <i class="fa-solid fa-envelope"></i>
+
                     <strong>Email:</strong>
+
                     <a href="mailto:danielgomesrolando@gmail.com">
                         danielgomesrolando@gmail.com
                     </a>
                 </p>
 
                 <p>
-                    <strong>Phone</strong>
+                    <i class="fa-solid fa-phone"></i>
+
+                    <strong>Phone:</strong>
+
                     <span>(+55) 31 98539-5309</span>
                 </p>
 
                 <p>
+                    <i class="fa-solid fa-location-dot"></i>
+
                     <strong>Location:</strong>
+
                     <span>Belo Horizonte, MG</span>
                 </p>
 
