@@ -5,6 +5,15 @@ public class GitHubUser {
     private String avatr_url;
     private int public_repos;
     private int followers;
+    private int total_commits;
+
+    public int getTotal_commits() {
+        return total_commits;
+    }
+
+    public void setTotal_commits(int total_commits) {
+        this.total_commits = total_commits;
+    }
 
     public String getLogin() {
         return login;
