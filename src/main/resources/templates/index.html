@@ -15,6 +15,15 @@
 
 <body>
 
+<div class="top-bar">
+    <h1><a href="#profile">TaroNukem's Portfolio</a></h1>
+    <a href="#profile">Profile</a>
+    <a href="#projects">Projects</a>
+    <a href="#experiences">Experiences</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+</div>
+
 <video class="video-background" autoplay muted loop playsinline>
     <source th:src="@{/videos/fundo.mp4}" type="video/mp4">
 </video>
@@ -25,7 +34,7 @@
 
     <div class="esquerda">
 
-        <div class="card bio-foto">
+        <div class="card bio-foto" id="profile">
 
             <img th:src="@{/images/fotoPerfil.jpg}" alt="Foto de perfil">
 
@@ -58,30 +67,7 @@
 
         </div>
 
-        <div class="card languages">
-
-            <h2>
-                <i class="fa-solid fa-code"></i>
-                Languages
-            </h2>
-
-            <div class="wakatime">
-
-                <a href="https://nice-readme.vercel.app/wakatime"
-                   target="_blank"
-                   rel="noopener noreferrer">
-
-                    <img
-                            src="https://helio-github-stats.vercel.app/api/wakatime?username=b860e6a6-2e86-4589-9069-df3ceeda98b1&card_width=650&line_height=30&layout=default&display_format=time&hide_title=true&langs_count=6&theme=dark&bg_color=000000"
-                            alt="WakaTime Stats">
-
-                </a>
-
-            </div>
-
-        </div>
-
-        <div class="card projetos">
+        <div class="card projetos" id="projects">
 
             <h2>
                 <i class="fa-solid fa-folder-open"></i>
@@ -96,19 +82,63 @@
 
         </div>
 
+        <div class="card languages">
+
+            <h2>
+                <i class="fa-solid fa-code"></i>
+                Languages
+            </h2>
+
+            <div class="wakatime">
+
+                <a href="https://nice-readme.vercel.app/wakatime"
+                   target="_blank"
+                   rel="noopener noreferrer">
+
+                    <img
+                            src="https://helio-github-stats.vercel.app/api/wakatime?username=b860e6a6-2e86-4589-9069-df3ceeda98b1&card_width=650&line_height=30&layout=default&display_format=time&hide_title=true&langs_count=6&theme=dark&bg_color=000000&hide=Markdown,XML,Bash,Text,CSV,GitIgnore%20file,Git,JSON,YAML,TOML,Properties,Java%20Properties,Dockerfile"
+                            alt="WakaTime Stats"
+                            loading="lazy">
+
+                </a>
+
+            </div>
+
+        </div>
+
         <div class="card skills">
 
             <h2>
                 <i class="fa-solid fa-code"></i>
-                SKILLS
+                TECHNICAL SKILLS
             </h2>
 
-            <p>Java</p>
-            <p>Spring Boot</p>
-            <p>Python</p>
-            <p>HTML</p>
-            <p>CSS</p>
-            <p>Git</p>
+            <div class="skill-category">
+
+                <h3>LANGUAGES & FRAMEWORKS</h3>
+
+                <div class="skill-tags">
+                    <span>Java</span>
+                    <span>Spring Boot</span>
+                    <span>Python</span>
+                    <span>HTML5</span>
+                    <span>CSS3</span>
+                </div>
+
+            </div>
+
+            <div class="skill-category">
+
+                <h3>TOOLS & PLATFORMS</h3>
+
+                <div class="skill-tags">
+                    <span>Git</span>
+                    <span>VS Code</span>
+                    <span>IntelliJ IDEA</span>
+                    <span>PyCharm</span>
+                </div>
+
+            </div>
 
         </div>
 
@@ -119,7 +149,7 @@
         <div class="card developer">
 
             <div class="logoPUC">
-                <img th:src="@{/images/pucMinas.png}" alt="Puc Minas">
+                <img th:src="@{/images/pucMinas.png}" alt="PUC Minas">
             </div>
 
             <h1>2º Semestre</h1>
@@ -144,12 +174,14 @@
             </div>
 
             <div class="stat">
+
                 <span>
                     <i class="fa-solid fa-code-commit"></i>
                     Total commits
                 </span>
 
-                <strong th:text="${github.total_commits}"></strong>
+                <strong th:text="${github.total_commits}">0</strong>
+
             </div>
 
             <div class="stat">
@@ -189,7 +221,7 @@
 
         </div>
 
-        <div class="card contato">
+        <div class="card contato" id="experiences">
 
             <h2>CONNECT WITH ME</h2>
 
@@ -235,6 +267,7 @@
 
                 <a th:href="@{/files/curriculo.pdf}"
                    target="_blank"
+                   rel="noopener noreferrer"
                    class="contato-botao">
 
                     <i class="fa-solid fa-file-lines"></i>
@@ -248,9 +281,7 @@
 
                 <p>
                     <i class="fa-solid fa-envelope"></i>
-
                     <strong>Email:</strong>
-
                     <a href="mailto:danielgomesrolando@gmail.com">
                         danielgomesrolando@gmail.com
                     </a>
@@ -258,17 +289,13 @@
 
                 <p>
                     <i class="fa-solid fa-phone"></i>
-
                     <strong>Phone:</strong>
-
                     <span>(+55) 31 98539-5309</span>
                 </p>
 
                 <p>
                     <i class="fa-solid fa-location-dot"></i>
-
                     <strong>Location:</strong>
-
                     <span>Belo Horizonte, MG</span>
                 </p>
 
@@ -280,6 +307,67 @@
 
 </div>
 
-</body>
+<footer class="footer">
 
+    <div class="footer-main">
+
+        <div class="footer-column">
+            <h3>QUICK LINKS</h3>
+
+            <a href="#profile">Profile</a>
+            <a href="#projects">Projects</a>
+            <a href="#experiences">Experiences</a>
+            <a href="#contact">Contact</a>
+            <a href="#skills">Skills</a>
+        </div>
+
+        <div class="footer-column">
+            <h3>CONNECT WITH ME</h3>
+
+            <div class="footer-socials">
+
+                <a href="https://github.com/TaroNukem"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+
+                <a href="https://www.linkedin.com/in/daniel-rolando-22061137a"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+
+                <a href="mailto:danielgomesrolando@gmail.com"
+                   aria-label="Email">
+                    <i class="fa-regular fa-envelope"></i>
+                </a>
+
+            </div>
+        </div>
+
+        <div class="footer-column footer-about">
+            <h3>ABOUT</h3>
+
+            <p>
+                Steam-inspired portfolio showcasing project
+            </p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        <div class="footer-bottom-content">
+            <span>© 2026 Daniel Rolando. All rights reserved.</span>
+            <span>Made with my Steam profile inspiration 🎮</span>
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
 </html>
