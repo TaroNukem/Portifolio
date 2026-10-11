@@ -1,11 +1,12 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Daniel Rolando</title>
+    <title>Portfólio de Daniel Rolando</title>
 
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
@@ -16,12 +17,33 @@
 <body>
 
 <div class="top-bar">
-    <h1><a href="#profile">TaroNukem's Portfolio</a></h1>
-    <a href="#profile">Profile</a>
-    <a href="#projects">Projects</a>
-    <a href="#experiences">Experiences</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
+
+    <h1>
+        <a href="#profile">TaroNukem's Portfolio</a>
+    </h1>
+
+    <a href="#profile" data-pt="PERFIL" data-en="PROFILE">PERFIL</a>
+    <a href="#projects" data-pt="PROJETOS" data-en="PROJECTS">PROJETOS</a>
+    <a href="#experiences" data-pt="EXPERIÊNCIAS" data-en="EXPERIENCE">EXPERIÊNCIAS</a>
+    <a href="#skills" data-pt="HABILIDADES" data-en="SKILLS">HABILIDADES</a>
+    <a href="#contact" data-pt="CONTATO" data-en="CONTACT">CONTATO</a>
+
+    <div class="language-selector">
+        <a href="#"
+           class="language-button active"
+           data-language="pt-BR"
+           aria-label="Português do Brasil"
+           aria-pressed="true">🇧🇷 PT-BR</a>
+
+        <span>|</span>
+
+        <a href="#"
+           class="language-button"
+           data-language="en"
+           aria-label="English"
+           aria-pressed="false">🇺🇸 EN</a>
+    </div>
+
 </div>
 
 <video class="video-background" autoplay muted loop playsinline>
@@ -36,13 +58,18 @@
 
         <div class="card bio-foto" id="profile">
 
-            <img th:src="@{/images/fotoPerfil.jpg}" alt="Foto de perfil">
+            <img th:src="@{/images/fotoPerfil.jpg}"
+                 alt="Foto de perfil"
+                 data-alt-pt="Foto de perfil"
+                 data-alt-en="Profile picture">
 
             <div class="info">
 
                 <h1>Daniel Rolando</h1>
 
-                <h3>
+                <h3
+                        data-pt="Graduando em Engenharia de Software na PUC Minas | Desenvolvimento Web | Java, Spring Boot, Python, HTML, CSS, Git"
+                        data-en="Software Engineering student at PUC Minas | Web Development | Java, Spring Boot, Python, HTML, CSS, Git">
                     Graduando em Engenharia de Software na PUC Minas |
                     Desenvolvimento Web | Java, Spring Boot, Python, HTML,
                     CSS, Git
@@ -50,17 +77,22 @@
 
                 <h5>
                     <i class="fa-solid fa-location-dot"></i>
-                    Belo Horizonte, Minas Gerais
+                    <span data-pt="Belo Horizonte, Minas Gerais"
+                          data-en="Belo Horizonte, Minas Gerais">
+                        Belo Horizonte, Minas Gerais
+                    </span>
                 </h5>
 
-                <p>
-                    Sou estudante de Engenharia de Software e estou no começo da minha
-                    jornada como desenvolvedor. Gosto de aprender coisas novas, criar
-                    projetos e entender melhor como as tecnologias funcionam.
-
-                    Fora da programação, curto jogos, música e basquete. Gosto de todo
-                    tipo de música, gosto bastante de Metal Gear, o Kojima é um gênio
-                    e recentemente comecei a aprender violão.
+                <p
+                        data-pt="Sou estudante de Engenharia de Software e estou no começo da minha jornada como desenvolvedor. Gosto de aprender coisas novas, criar projetos e entender melhor como as tecnologias funcionam. Fora da programação, curto jogos, música e basquete. Sou muito fã de Metal Gear, Red Dead Redemption e Guitar Hero. Também curto rock e metal e recentemente comecei a aprender violão."
+                        data-en="I'm a Software Engineering student at the beginning of my journey as a developer. I enjoy learning new things, building projects, and understanding how technology works. Outside programming, I enjoy video games, music, and basketball. I'm a big fan of Metal Gear, Red Dead Redemption, and Guitar Hero. I also enjoy rock and metal, and recently started learning guitar.">
+                    Sou estudante de Engenharia de Software e estou no começo
+                    da minha jornada como desenvolvedor. Gosto de aprender
+                    coisas novas, criar projetos e entender melhor como as
+                    tecnologias funcionam. Fora da programação, curto jogos,
+                    música e basquete. Sou muito fã de Metal Gear, Red Dead
+                    Redemption e Guitar Hero. Também curto rock e metal e
+                    recentemente comecei a aprender violão.
                 </p>
 
             </div>
@@ -71,7 +103,10 @@
 
             <h2>
                 <i class="fa-solid fa-folder-open"></i>
-                FEATURED PROJECTS
+                <span data-pt="PROJETOS EM DESTAQUE"
+                      data-en="FEATURED PROJECTS">
+                    PROJETOS EM DESTAQUE
+                </span>
             </h2>
 
             <div class="projects-timeline">
@@ -87,13 +122,23 @@
 
                     <div class="project-content">
 
-                        <span class="project-number">PROJECT 01</span>
+                        <span class="project-number"
+                              data-pt="PROJETO 01"
+                              data-en="PROJECT 01">
+                            PROJETO 01
+                        </span>
 
-                        <h3>Biblioteca de Jogos</h3>
+                        <h3 data-pt="Biblioteca de Jogos"
+                            data-en="Games Library">
+                            Biblioteca de Jogos
+                        </h3>
 
-                        <p>
-                            Aplicação web para explorar e organizar uma biblioteca
-                            de jogos, desenvolvida com Java e Spring Boot.
+                        <p
+                                data-pt="Aplicação web para explorar e organizar uma biblioteca de jogos, desenvolvida com Java e Spring Boot."
+                                data-en="A web application for exploring and organizing a game library, built with Java and Spring Boot.">
+                            Aplicação web para explorar e organizar uma
+                            biblioteca de jogos, desenvolvida com Java e
+                            Spring Boot.
                         </p>
 
                         <div class="project-technologies">
@@ -105,16 +150,20 @@
                         </div>
 
                         <div class="project-actions">
-
                             <a
                                     href="https://github.com/TaroNukem/Biblioteca-de-Jogos"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="project-button">
-                                <i class="fa-brands fa-github"></i>
-                                Código
-                            </a>
 
+                                <i class="fa-brands fa-github"></i>
+
+                                <span data-pt="Código"
+                                      data-en="Source code">
+                                    Código
+                                </span>
+
+                            </a>
                         </div>
 
                     </div>
@@ -132,14 +181,23 @@
 
                     <div class="project-content">
 
-                        <span class="project-number">PROJECT 02</span>
+                        <span class="project-number"
+                              data-pt="PROJETO 02"
+                              data-en="PROJECT 02">
+                            PROJETO 02
+                        </span>
 
-                        <h3>Portfólio Pessoal</h3>
+                        <h3 data-pt="Portfólio Pessoal"
+                            data-en="Personal Portfolio">
+                            Portfólio Pessoal
+                        </h3>
 
-                        <p>
+                        <p
+                                data-pt="Portfólio inspirado no perfil da Steam, desenvolvido para apresentar meus projetos, habilidades e informações como estudante de Engenharia de Software."
+                                data-en="A Steam-inspired portfolio showcasing my projects, skills, and experience as a Software Engineering student.">
                             Portfólio inspirado no perfil da Steam, desenvolvido
-                            para apresentar meus projetos, habilidades e informações
-                            como estudante de Engenharia de Software.
+                            para apresentar meus projetos, habilidades e
+                            informações como estudante de Engenharia de Software.
                         </p>
 
                         <div class="project-technologies">
@@ -151,16 +209,20 @@
                         </div>
 
                         <div class="project-actions">
-
                             <a
                                     href="https://github.com/TaroNukem/Portifolio"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="project-button">
-                                <i class="fa-brands fa-github"></i>
-                                Código
-                            </a>
 
+                                <i class="fa-brands fa-github"></i>
+
+                                <span data-pt="Código"
+                                      data-en="Source code">
+                                    Código
+                                </span>
+
+                            </a>
                         </div>
 
                     </div>
@@ -175,7 +237,10 @@
 
             <h2>
                 <i class="fa-solid fa-code"></i>
-                Languages
+                <span data-pt="LINGUAGENS DE PROGRAMAÇÃO"
+                      data-en="PROGRAMMING LANGUAGES">
+                    LINGUAGENS DE PROGRAMAÇÃO
+                </span>
             </h2>
 
             <div class="wakatime">
@@ -186,7 +251,7 @@
 
                     <img
                             src="https://helio-github-stats.vercel.app/api/wakatime?username=b860e6a6-2e86-4589-9069-df3ceeda98b1&card_width=650&line_height=30&layout=default&display_format=time&hide_title=true&langs_count=6&theme=dark&bg_color=000000&hide=Markdown,XML,Bash,Text,CSV,GitIgnore%20file,Git,JSON,YAML,TOML,Properties,Java%20Properties,Dockerfile"
-                            alt="WakaTime Stats"
+                            alt="Estatísticas do WakaTime"
                             loading="lazy">
 
                 </a>
@@ -195,16 +260,22 @@
 
         </div>
 
-        <div class="card skills">
+        <div class="card skills" id="skills">
 
             <h2>
                 <i class="fa-solid fa-code"></i>
-                TECHNICAL SKILLS
+                <span data-pt="HABILIDADES TÉCNICAS"
+                      data-en="TECHNICAL SKILLS">
+                    HABILIDADES TÉCNICAS
+                </span>
             </h2>
 
             <div class="skill-category">
 
-                <h3>LANGUAGES & FRAMEWORKS</h3>
+                <h3 data-pt="LINGUAGENS E FRAMEWORKS"
+                    data-en="LANGUAGES & FRAMEWORKS">
+                    LINGUAGENS E FRAMEWORKS
+                </h3>
 
                 <div class="skill-tags">
                     <span>Java</span>
@@ -218,7 +289,10 @@
 
             <div class="skill-category">
 
-                <h3>TOOLS & PLATFORMS</h3>
+                <h3 data-pt="FERRAMENTAS E PLATAFORMAS"
+                    data-en="TOOLS & PLATFORMS">
+                    FERRAMENTAS E PLATAFORMAS
+                </h3>
 
                 <div class="skill-tags">
                     <span>Git</span>
@@ -235,92 +309,109 @@
 
     <div class="direita">
 
-        <div class="card developer">
+        <div class="card developer" id="experiences">
 
             <div class="logoPUC">
                 <img th:src="@{/images/pucMinas.png}" alt="PUC Minas">
             </div>
 
-            <h1>2º Semestre</h1>
+            <h1 data-pt="2º Semestre"
+                data-en="2nd Semester">
+                2º Semestre
+            </h1>
 
-            <p>Estudante de Engenharia de Software</p>
+            <p data-pt="Estudante de Engenharia de Software"
+               data-en="Software Engineering Student">
+                Estudante de Engenharia de Software
+            </p>
 
         </div>
 
         <div class="card stats">
 
-            <h2>GITHUB STATS</h2>
+            <h2 data-pt="ESTATÍSTICAS DO GITHUB"
+                data-en="GITHUB STATISTICS">
+                ESTATÍSTICAS DO GITHUB
+            </h2>
 
             <div class="stat">
-
                 <span>
                     <i class="fa-solid fa-book-bookmark"></i>
-                    Repositories
+                    <span data-pt="Repositórios"
+                          data-en="Repositories">
+                        Repositórios
+                    </span>
                 </span>
 
-                <strong th:text="${github.public_repos}">0</strong>
-
+                <strong th:text="${github.public_repos} ?: 0">0</strong>
             </div>
 
             <div class="stat">
-
                 <span>
                     <i class="fa-solid fa-code-commit"></i>
-                    Total commits
+                    <span data-pt="Total de commits"
+                          data-en="Total commits">
+                        Total de commits
+                    </span>
                 </span>
 
-                <strong th:text="${github.total_commits}">0</strong>
-
+                <strong th:text="${github.total_commits} ?: 0">0</strong>
             </div>
 
             <div class="stat">
-
                 <span>
                     <i class="fa-solid fa-users"></i>
-                    Followers
+                    <span data-pt="Seguidores"
+                          data-en="Followers">
+                        Seguidores
+                    </span>
                 </span>
 
-                <strong th:text="${github.followers}">0</strong>
-
+                <strong th:text="${github.followers} ?: 0">0</strong>
             </div>
 
             <div class="stat">
-
                 <span>
                     <i class="fa-solid fa-code"></i>
-                    Top Languages
+                    <span data-pt="Principais linguagens"
+                          data-en="Top Languages">
+                        Principais linguagens
+                    </span>
                 </span>
-
             </div>
 
             <div class="top-languages">
-
                 <a href="https://nice-readme.vercel.app/top-langs"
                    target="_blank"
                    rel="noopener noreferrer">
 
                     <img
                             src="https://helio-github-stats.vercel.app/api/top-langs?username=TaroNukem&layout=pie&stats_format=percentages&theme=dark&hide_border=true&border_radius=5&card_width=466&locale=pt-br&hide_title=true&langs_count=10&size_weight=1"
-                            alt="Top Languages"
+                            alt="Principais linguagens do GitHub"
                             loading="lazy">
 
                 </a>
-
             </div>
 
         </div>
 
-        <div class="card contato" id="experiences">
+        <div class="card contato" id="contact">
 
-            <h2>CONNECT WITH ME</h2>
+            <h2 data-pt="CONECTE-SE COMIGO"
+                data-en="CONNECT WITH ME">
+                CONECTE-SE COMIGO
+            </h2>
 
             <div class="contato-followers">
 
                 <i class="fa-solid fa-users contato-followers-icon"></i>
 
-                <strong th:text="${github.followers}">0</strong>
+                <strong th:text="${github.followers} ?: 0">0</strong>
 
-                <span>GITHUB FOLLOWERS</span>
+                <span data-pt="SEGUIDORES NO GITHUB"
+                      data-en="GITHUB FOLLOWERS">
+                    SEGUIDORES NO GITHUB
+                </span>
 
             </div>
 
@@ -330,38 +421,30 @@
                    target="_blank"
                    rel="noopener noreferrer"
                    class="contato-botao">
-
                     <i class="fa-brands fa-github"></i>
                     GitHub
-
                 </a>
 
                 <a href="https://www.linkedin.com/in/daniel-rolando-22061137a"
                    target="_blank"
                    rel="noopener noreferrer"
                    class="contato-botao">
-
                     <i class="fa-brands fa-linkedin"></i>
                     LinkedIn
-
                 </a>
 
                 <a href="mailto:danielgomesrolando@gmail.com"
                    class="contato-botao">
-
                     <i class="fa-solid fa-envelope"></i>
                     Email
-
                 </a>
 
                 <a th:href="@{/files/curriculo.pdf}"
                    target="_blank"
                    rel="noopener noreferrer"
                    class="contato-botao">
-
                     <i class="fa-solid fa-file-lines"></i>
-                    Currículo
-
+                    <span data-pt="Currículo" data-en="Resume">Currículo</span>
                 </a>
 
             </div>
@@ -370,7 +453,7 @@
 
                 <p>
                     <i class="fa-solid fa-envelope"></i>
-                    <strong>Email:</strong>
+                    <strong data-pt="Email:" data-en="Email:">Email:</strong>
                     <a href="mailto:danielgomesrolando@gmail.com">
                         danielgomesrolando@gmail.com
                     </a>
@@ -378,14 +461,17 @@
 
                 <p>
                     <i class="fa-solid fa-phone"></i>
-                    <strong>Phone:</strong>
+                    <strong data-pt="Telefone:" data-en="Phone:">Telefone:</strong>
                     <span>(+55) 31 98539-5309</span>
                 </p>
 
                 <p>
                     <i class="fa-solid fa-location-dot"></i>
-                    <strong>Location:</strong>
-                    <span>Belo Horizonte, MG</span>
+                    <strong data-pt="Localização:" data-en="Location:">Localização:</strong>
+                    <span data-pt="Belo Horizonte, MG"
+                          data-en="Belo Horizonte, MG">
+                        Belo Horizonte, MG
+                    </span>
                 </p>
 
             </div>
@@ -401,17 +487,26 @@
     <div class="footer-main">
 
         <div class="footer-column">
-            <h3>QUICK LINKS</h3>
 
-            <a href="#profile">Profile</a>
-            <a href="#projects">Projects</a>
-            <a href="#experiences">Experiences</a>
-            <a href="#contact">Contact</a>
-            <a href="#skills">Skills</a>
+            <h3 data-pt="LINKS RÁPIDOS"
+                data-en="QUICK LINKS">
+                LINKS RÁPIDOS
+            </h3>
+
+            <a href="#profile" data-pt="Perfil" data-en="Profile">Perfil</a>
+            <a href="#projects" data-pt="Projetos" data-en="Projects">Projetos</a>
+            <a href="#experiences" data-pt="Experiências" data-en="Experience">Experiências</a>
+            <a href="#contact" data-pt="Contato" data-en="Contact">Contato</a>
+            <a href="#skills" data-pt="Habilidades" data-en="Skills">Habilidades</a>
+
         </div>
 
         <div class="footer-column">
-            <h3>CONNECT WITH ME</h3>
+
+            <h3 data-pt="CONECTE-SE COMIGO"
+                data-en="CONNECT WITH ME">
+                CONECTE-SE COMIGO
+            </h3>
 
             <div class="footer-socials">
 
@@ -435,14 +530,22 @@
                 </a>
 
             </div>
+
         </div>
 
         <div class="footer-column footer-about">
-            <h3>ABOUT</h3>
 
-            <p>
-                Steam-inspired portfolio showcasing project
+            <h3 data-pt="SOBRE"
+                data-en="ABOUT">
+                SOBRE
+            </h3>
+
+            <p
+                    data-pt="Portfólio inspirado na Steam para apresentar meus projetos e habilidades."
+                    data-en="A Steam-inspired portfolio showcasing my projects and skills.">
+                Portfólio inspirado na Steam para apresentar meus projetos e habilidades.
             </p>
+
         </div>
 
     </div>
@@ -450,13 +553,76 @@
     <div class="footer-bottom">
 
         <div class="footer-bottom-content">
-            <span>© 2026 Daniel Rolando. All rights reserved.</span>
-            <span>Made with my Steam profile inspiration 🎮</span>
+
+            <span
+                    data-pt="© 2026 Daniel Rolando. Todos os direitos reservados."
+                    data-en="© 2026 Daniel Rolando. All rights reserved.">
+                © 2026 Daniel Rolando. Todos os direitos reservados.
+            </span>
+
+            <span
+                    data-pt="Feito com inspiração no meu perfil da Steam 🎮"
+                    data-en="Made with inspiration from my Steam profile 🎮">
+                Feito com inspiração no meu perfil da Steam 🎮
+            </span>
+
         </div>
 
     </div>
 
 </footer>
+
+<script>
+    function changeLanguage(language) {
+        document.querySelectorAll('[data-pt][data-en]').forEach(element => {
+            element.textContent = language === 'en'
+                ? element.dataset.en
+                : element.dataset.pt;
+        });
+
+        document.querySelectorAll('[data-alt-pt][data-alt-en]').forEach(element => {
+            element.alt = language === 'en'
+                ? element.dataset.altEn
+                : element.dataset.altPt;
+        });
+
+        document.documentElement.lang = language;
+
+        document.querySelectorAll('.language-button').forEach(button => {
+            const active = button.dataset.language === language;
+
+            button.classList.toggle('active', active);
+            button.setAttribute('aria-pressed', String(active));
+        });
+
+        document.title = language === 'en'
+            ? "TaroNukem's Portfolio"
+            : "Portfólio de Daniel Rolando";
+
+        try {
+            localStorage.setItem('portfolio-language', language);
+        } catch (e) {
+            // A troca de idioma funciona mesmo se o armazenamento estiver indisponível.
+        }
+    }
+
+    document.querySelectorAll('.language-button').forEach(button => {
+        button.addEventListener('click', event => {
+            event.preventDefault();
+            changeLanguage(button.dataset.language);
+        });
+    });
+
+    let savedLanguage = 'pt-BR';
+
+    try {
+        savedLanguage = localStorage.getItem('portfolio-language') || 'pt-BR';
+    } catch (e) {
+        savedLanguage = 'pt-BR';
+    }
+
+    changeLanguage(savedLanguage);
+</script>
 
 </body>
 </html>
