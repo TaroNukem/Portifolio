@@ -472,35 +472,40 @@
             event.preventDefault();
             closeProfileMenu();
 
+            const scrollY = window.scrollY;
+
             try {
-                const response = await fetch(link.href, {credentials: 'same-origin'});
-                if (!response.ok) throw new Error('Erro ' + response.status);
-
-                const doc = new DOMParser().parseFromString(await response.text(), 'text/html');
-                const current = document.body.querySelectorAll('*');
-                const next = doc.body.querySelectorAll('*');
-                if (current.length !== next.length) throw new Error('Estrutura diferente');
-
-                current.forEach((el, i) => {
-                    const other = next[i];
-                    if (el.tagName === 'SCRIPT') return;
-
-                    if (!el.children.length && el.textContent !== other.textContent) {
-                        el.textContent = other.textContent;
-                    }
-
-                    ['alt', 'aria-label'].forEach(attr => {
-                        if (other.hasAttribute(attr)) el.setAttribute(attr, other.getAttribute(attr));
-                    });
-
-                    if (el.classList.contains('language-option')) {
-                        el.classList.toggle('active', other.classList.contains('active'));
-                    }
+                const response = await fetch(link.href, {
+                    credentials: 'same-origin'
                 });
+
+                if (!response.ok) {
+                    throw new Error('Erro ' + response.status);
+                }
+
+                const html = await response.text();
+                const doc = new DOMParser().parseFromString(html, 'text/html');
 
                 document.title = doc.title;
                 document.documentElement.lang = doc.documentElement.lang;
-            } catch (e) {
+
+                document.body.innerHTML = doc.body.innerHTML;
+
+                document.querySelectorAll('script').forEach(oldScript => {
+                    const newScript = document.createElement('script');
+
+                    Array.from(oldScript.attributes).forEach(attribute => {
+                        newScript.setAttribute(attribute.name, attribute.value);
+                    });
+
+                    newScript.textContent = oldScript.textContent;
+                    oldScript.replaceWith(newScript);
+                });
+
+                history.replaceState(null, '', link.href);
+                window.scrollTo(0, scrollY);
+
+            } catch (error) {
                 window.location.href = link.href;
             }
         });
