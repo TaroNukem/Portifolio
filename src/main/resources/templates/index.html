@@ -1,49 +1,74 @@
-
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="pt-BR" th:lang="${#locale.toLanguageTag()}" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Portfólio de Daniel Rolando</title>
-
+    <title th:text="#{page.title}">Daniel Rolando</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
-
 <body>
 
 <div class="top-bar">
+    <h1><a href="#profile">TaroNukem's Portfolio</a></h1>
+    <a href="#profile" th:text="#{menu.profile}"></a>
+    <a href="#projects" th:text="#{menu.projects}"></a>
+    <a href="#experiences" th:text="#{menu.experiences}"></a>
+    <a href="#skills" th:text="#{menu.skills}"></a>
+    <a href="#contact" th:text="#{menu.contact}"></a>
 
-    <h1>
-        <a href="#profile">TaroNukem's Portfolio</a>
-    </h1>
+    <div class="profile-menu">
+        <button class="profile-menu-button" id="profileMenuButton" type="button" aria-expanded="false" aria-controls="profileDropdown">
+            <i class="fa-solid fa-user-gear"></i>
+            <span th:text="#{menu.options}"></span>
+            <i class="fa-solid fa-chevron-down menu-arrow"></i>
+        </button>
 
-    <a href="#profile" data-pt="PERFIL" data-en="PROFILE">PERFIL</a>
-    <a href="#projects" data-pt="PROJETOS" data-en="PROJECTS">PROJETOS</a>
-    <a href="#experiences" data-pt="EXPERIÊNCIAS" data-en="EXPERIENCE">EXPERIÊNCIAS</a>
-    <a href="#skills" data-pt="HABILIDADES" data-en="SKILLS">HABILIDADES</a>
-    <a href="#contact" data-pt="CONTATO" data-en="CONTACT">CONTATO</a>
+        <div class="profile-dropdown" id="profileDropdown" hidden>
+            <a href="https://github.com/TaroNukem/Portifolio" target="_blank" rel="noopener noreferrer" class="dropdown-item">
+                <i class="fa-solid fa-code"></i>
+                <span th:text="#{menu.projectDetails}"></span>
+                <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
+            </a>
 
-    <div class="language-selector">
-        <a href="#"
-           class="language-button active"
-           data-language="pt-BR"
-           aria-label="Português do Brasil"
-           aria-pressed="true">🇧🇷 PT-BR</a>
+            <div class="dropdown-section">
+                <button type="button" class="dropdown-item dropdown-toggle" id="languageMenuButton" aria-expanded="false" aria-controls="languageSubmenu">
+                    <i class="fa-solid fa-globe"></i>
+                    <span th:text="#{menu.changeLanguage}"></span>
+                    <i class="fa-solid fa-chevron-right submenu-arrow"></i>
+                </button>
 
-        <span>|</span>
+                <div class="language-submenu" id="languageSubmenu" hidden>
+                    <a class="dropdown-item language-option" th:classappend="${#locale.language == 'pt'} ? 'active'" th:href="@{/(lang='pt-BR')}">
+                        <span>🇧🇷</span><span>Português</span><i class="fa-solid fa-check language-check"></i>
+                    </a>
+                    <a class="dropdown-item language-option" th:classappend="${#locale.language == 'en'} ? 'active'" th:href="@{/(lang='en')}">
+                        <span>🇺🇸</span><span>English</span><i class="fa-solid fa-check language-check"></i>
+                    </a>
+                </div>
+            </div>
 
-        <a href="#"
-           class="language-button"
-           data-language="en"
-           aria-label="English"
-           aria-pressed="false">🇺🇸 EN</a>
+            <div class="dropdown-divider"></div>
+
+            <button type="button" class="dropdown-item" id="openPixButton">
+                <i class="fa-solid fa-qrcode"></i>
+                <span th:text="#{menu.pix}"></span>
+            </button>
+        </div>
     </div>
+</div>
 
+<div class="pix-modal" id="pixModal" hidden>
+    <div class="pix-modal-content" role="dialog" aria-modal="true" aria-labelledby="pixModalTitle">
+        <button type="button" class="pix-close-button" id="closePixButton" th:aria-label="#{pix.close}">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <i class="fa-solid fa-qrcode pix-title-icon"></i>
+        <h2 id="pixModalTitle" th:text="#{menu.pix}"></h2>
+        <p th:text="#{pix.description}"></p>
+        <img th:src="@{/images/qrcode-pix.png}" th:alt="#{pix.qrAlt}" class="pix-qr-code">
+    </div>
 </div>
 
 <video class="video-background" autoplay muted loop playsinline>
@@ -57,425 +82,245 @@
     <div class="esquerda">
 
         <div class="card bio-foto" id="profile">
-
-            <img th:src="@{/images/fotoPerfil.jpg}"
-                 alt="Foto de perfil"
-                 data-alt-pt="Foto de perfil"
-                 data-alt-en="Profile picture">
+            <img th:src="@{/images/fotoPerfil.jpg}" th:alt="#{profile.photo.alt}">
 
             <div class="info">
-
                 <h1>Daniel Rolando</h1>
-
-                <h3
-                        data-pt="Graduando em Engenharia de Software na PUC Minas | Desenvolvimento Web | Java, Spring Boot, Python, HTML, CSS, Git"
-                        data-en="Software Engineering student at PUC Minas | Web Development | Java, Spring Boot, Python, HTML, CSS, Git">
-                    Graduando em Engenharia de Software na PUC Minas |
-                    Desenvolvimento Web | Java, Spring Boot, Python, HTML,
-                    CSS, Git
-                </h3>
-
+                <h3 th:text="#{profile.tagline}"></h3>
                 <h5>
                     <i class="fa-solid fa-location-dot"></i>
-                    <span data-pt="Belo Horizonte, Minas Gerais"
-                          data-en="Belo Horizonte, Minas Gerais">
-                        Belo Horizonte, Minas Gerais
-                    </span>
+                    <span th:text="#{profile.location}"></span>
                 </h5>
-
-                <p
-                        data-pt="Sou estudante de Engenharia de Software e estou no começo da minha jornada como desenvolvedor. Gosto de aprender coisas novas, criar projetos e entender melhor como as tecnologias funcionam. Fora da programação, curto jogos, música e basquete. Sou muito fã de Metal Gear, Red Dead Redemption e Guitar Hero. Também curto rock e metal e recentemente comecei a aprender violão."
-                        data-en="I'm a Software Engineering student at the beginning of my journey as a developer. I enjoy learning new things, building projects, and understanding how technology works. Outside programming, I enjoy video games, music, and basketball. I'm a big fan of Metal Gear, Red Dead Redemption, and Guitar Hero. I also enjoy rock and metal, and recently started learning guitar.">
-                    Sou estudante de Engenharia de Software e estou no começo
-                    da minha jornada como desenvolvedor. Gosto de aprender
-                    coisas novas, criar projetos e entender melhor como as
-                    tecnologias funcionam. Fora da programação, curto jogos,
-                    música e basquete. Sou muito fã de Metal Gear, Red Dead
-                    Redemption e Guitar Hero. Também curto rock e metal e
-                    recentemente comecei a aprender violão.
-                </p>
-
+                <p th:text="#{profile.bio}"></p>
             </div>
-
         </div>
 
         <div class="card projetos" id="projects">
-
             <h2>
                 <i class="fa-solid fa-folder-open"></i>
-                <span data-pt="PROJETOS EM DESTAQUE"
-                      data-en="FEATURED PROJECTS">
-                    PROJETOS EM DESTAQUE
-                </span>
+                <span th:text="#{projects.heading}"></span>
             </h2>
 
-            <div class="projects-timeline">
+            <div class="timeline">
 
-                <article class="project-card">
-
-                    <div class="project-preview">
-                        <img
-                                th:src="@{/images/biblioteca-jogos.png}"
-                                alt="Preview da Biblioteca de Jogos"
-                                loading="lazy">
-                    </div>
-
-                    <div class="project-content">
-
-                        <span class="project-number"
-                              data-pt="PROJETO 01"
-                              data-en="PROJECT 01">
-                            PROJETO 01
-                        </span>
-
-                        <h3 data-pt="Biblioteca de Jogos"
-                            data-en="Games Library">
-                            Biblioteca de Jogos
-                        </h3>
-
-                        <p
-                                data-pt="Aplicação web para explorar e organizar uma biblioteca de jogos, desenvolvida com Java e Spring Boot."
-                                data-en="A web application for exploring and organizing a game library, built with Java and Spring Boot.">
-                            Aplicação web para explorar e organizar uma
-                            biblioteca de jogos, desenvolvida com Java e
-                            Spring Boot.
-                        </p>
-
-                        <div class="project-technologies">
-                            <span>Java</span>
-                            <span>Spring Boot</span>
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>JavaScript</span>
+                <div class="timeline-item">
+                    <span class="timeline-date" th:text="#{projects.games.date}"></span>
+                    <article class="project-card">
+                        <div class="project-preview">
+                            <img th:src="@{/images/biblioteca-jogos.png}" th:alt="#{projects.games.imageAlt}" loading="lazy">
                         </div>
-
-                        <div class="project-actions">
-                            <a
-                                    href="https://github.com/TaroNukem/Biblioteca-de-Jogos"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="project-button">
-
-                                <i class="fa-brands fa-github"></i>
-
-                                <span data-pt="Código"
-                                      data-en="Source code">
-                                    Código
-                                </span>
-
-                            </a>
+                        <div class="project-content">
+                            <span class="project-number" th:text="#{projects.number1}"></span>
+                            <h3 th:text="#{projects.games.title}"></h3>
+                            <p th:text="#{projects.games.description}"></p>
+                            <div class="project-technologies">
+                                <span>Java</span><span>Spring Boot</span><span>HTML</span><span>CSS</span><span>JavaScript</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/TaroNukem/Biblioteca-de-Jogos" target="_blank" rel="noopener noreferrer" class="project-button">
+                                    <i class="fa-brands fa-github"></i>
+                                    <span th:text="#{projects.code}"></span>
+                                </a>
+                            </div>
                         </div>
+                    </article>
+                </div>
 
-                    </div>
-
-                </article>
-
-                <article class="project-card">
-
-                    <div class="project-preview">
-                        <img
-                                th:src="@{/images/portfolio.png}"
-                                alt="Preview do portfólio pessoal"
-                                loading="lazy">
-                    </div>
-
-                    <div class="project-content">
-
-                        <span class="project-number"
-                              data-pt="PROJETO 02"
-                              data-en="PROJECT 02">
-                            PROJETO 02
-                        </span>
-
-                        <h3 data-pt="Portfólio Pessoal"
-                            data-en="Personal Portfolio">
-                            Portfólio Pessoal
-                        </h3>
-
-                        <p
-                                data-pt="Portfólio inspirado no perfil da Steam, desenvolvido para apresentar meus projetos, habilidades e informações como estudante de Engenharia de Software."
-                                data-en="A Steam-inspired portfolio showcasing my projects, skills, and experience as a Software Engineering student.">
-                            Portfólio inspirado no perfil da Steam, desenvolvido
-                            para apresentar meus projetos, habilidades e
-                            informações como estudante de Engenharia de Software.
-                        </p>
-
-                        <div class="project-technologies">
-                            <span>Java</span>
-                            <span>Spring Boot</span>
-                            <span>Thymeleaf</span>
-                            <span>HTML</span>
-                            <span>CSS</span>
+                <div class="timeline-item">
+                    <span class="timeline-date" th:text="#{projects.portfolio.date}"></span>
+                    <article class="project-card">
+                        <div class="project-preview">
+                            <img th:src="@{/images/portfolio.png}" th:alt="#{projects.portfolio.imageAlt}" loading="lazy">
                         </div>
-
-                        <div class="project-actions">
-                            <a
-                                    href="https://github.com/TaroNukem/Portifolio"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="project-button">
-
-                                <i class="fa-brands fa-github"></i>
-
-                                <span data-pt="Código"
-                                      data-en="Source code">
-                                    Código
-                                </span>
-
-                            </a>
+                        <div class="project-content">
+                            <span class="project-number" th:text="#{projects.number2}"></span>
+                            <h3 th:text="#{projects.portfolio.title}"></h3>
+                            <p th:text="#{projects.portfolio.description}"></p>
+                            <div class="project-technologies">
+                                <span>Java</span><span>Spring Boot</span><span>Thymeleaf</span><span>HTML</span><span>CSS</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/TaroNukem/Portifolio" target="_blank" rel="noopener noreferrer" class="project-button">
+                                    <i class="fa-brands fa-github"></i>
+                                    <span th:text="#{projects.code}"></span>
+                                </a>
+                            </div>
                         </div>
-
-                    </div>
-
-                </article>
+                    </article>
+                </div>
 
             </div>
+        </div>
 
+        <div class="card experiencias" id="experiences">
+            <h2>
+                <i class="fa-solid fa-briefcase"></i>
+                <span th:text="#{experiences.heading}"></span>
+            </h2>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <span class="timeline-date" th:text="#{experiences.tech.period}"></span>
+                    <article class="experience-card">
+                        <h3 th:text="#{experiences.tech.role}"></h3>
+                        <h4 th:text="#{experiences.tech.place}"></h4>
+                        <p th:text="#{experiences.tech.description}"></p>
+                    </article>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date" th:text="#{experiences.puc.period}"></span>
+                    <article class="experience-card">
+                        <h3 th:text="#{experiences.puc.role}"></h3>
+                        <h4 th:text="#{experiences.puc.place}"></h4>
+                        <p th:text="#{experiences.puc.description}"></p>
+                    </article>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date" th:text="#{experiences.personal.period}"></span>
+                    <article class="experience-card">
+                        <h3 th:text="#{experiences.personal.role}"></h3>
+                        <h4 th:text="#{experiences.personal.place}"></h4>
+                        <p th:text="#{experiences.personal.description}"></p>
+                    </article>
+                </div>
+
+            </div>
         </div>
 
         <div class="card languages">
-
             <h2>
                 <i class="fa-solid fa-code"></i>
-                <span data-pt="LINGUAGENS DE PROGRAMAÇÃO"
-                      data-en="PROGRAMMING LANGUAGES">
-                    LINGUAGENS DE PROGRAMAÇÃO
-                </span>
+                <span th:text="#{languages.heading}"></span>
             </h2>
 
             <div class="wakatime">
-
-                <a href="https://nice-readme.vercel.app/wakatime"
-                   target="_blank"
-                   rel="noopener noreferrer">
-
-                    <img
-                            src="https://helio-github-stats.vercel.app/api/wakatime?username=b860e6a6-2e86-4589-9069-df3ceeda98b1&card_width=650&line_height=30&layout=default&display_format=time&hide_title=true&langs_count=6&theme=dark&bg_color=000000&hide=Markdown,XML,Bash,Text,CSV,GitIgnore%20file,Git,JSON,YAML,TOML,Properties,Java%20Properties,Dockerfile"
-                            alt="Estatísticas do WakaTime"
-                            loading="lazy">
-
+                <a href="https://nice-readme.vercel.app/wakatime" target="_blank" rel="noopener noreferrer">
+                    <img src="https://helio-github-stats.vercel.app/api/wakatime?username=b860e6a6-2e86-4589-9069-df3ceeda98b1&card_width=650&line_height=30&layout=default&display_format=time&hide_title=true&langs_count=6&theme=dark&bg_color=000000&hide=Markdown,XML,Bash,Text,CSV,GitIgnore%20file,Git,JSON,YAML,TOML,Properties,Java%20Properties,Dockerfile"
+                         alt="WakaTime" loading="lazy">
                 </a>
-
             </div>
-
         </div>
 
         <div class="card skills" id="skills">
-
             <h2>
                 <i class="fa-solid fa-code"></i>
-                <span data-pt="HABILIDADES TÉCNICAS"
-                      data-en="TECHNICAL SKILLS">
-                    HABILIDADES TÉCNICAS
-                </span>
+                <span th:text="#{skills.heading}"></span>
             </h2>
 
             <div class="skill-category">
-
-                <h3 data-pt="LINGUAGENS E FRAMEWORKS"
-                    data-en="LANGUAGES & FRAMEWORKS">
-                    LINGUAGENS E FRAMEWORKS
-                </h3>
-
+                <h3 th:text="#{skills.languages}"></h3>
                 <div class="skill-tags">
-                    <span>Java</span>
-                    <span>Spring Boot</span>
-                    <span>Python</span>
-                    <span>HTML5</span>
-                    <span>CSS3</span>
+                    <span>Java</span><span>Spring Boot</span><span>Python</span><span>HTML5</span><span>CSS3</span>
                 </div>
-
             </div>
 
             <div class="skill-category">
-
-                <h3 data-pt="FERRAMENTAS E PLATAFORMAS"
-                    data-en="TOOLS & PLATFORMS">
-                    FERRAMENTAS E PLATAFORMAS
-                </h3>
-
+                <h3 th:text="#{skills.tools}"></h3>
                 <div class="skill-tags">
-                    <span>Git</span>
-                    <span>VS Code</span>
-                    <span>IntelliJ IDEA</span>
-                    <span>PyCharm</span>
+                    <span>Git</span><span>VS Code</span><span>IntelliJ IDEA</span><span>PyCharm</span>
                 </div>
-
             </div>
-
         </div>
 
     </div>
 
     <div class="direita">
 
-        <div class="card developer" id="experiences">
-
+        <div class="card developer">
             <div class="logoPUC">
                 <img th:src="@{/images/pucMinas.png}" alt="PUC Minas">
             </div>
-
-            <h1 data-pt="2º Semestre"
-                data-en="2nd Semester">
-                2º Semestre
-            </h1>
-
-            <p data-pt="Estudante de Engenharia de Software"
-               data-en="Software Engineering Student">
-                Estudante de Engenharia de Software
-            </p>
-
+            <h1 th:text="#{education.semester}"></h1>
+            <p th:text="#{education.description}"></p>
         </div>
 
         <div class="card stats">
-
-            <h2 data-pt="ESTATÍSTICAS DO GITHUB"
-                data-en="GITHUB STATISTICS">
-                ESTATÍSTICAS DO GITHUB
-            </h2>
+            <h2 th:text="#{github.heading}"></h2>
 
             <div class="stat">
                 <span>
                     <i class="fa-solid fa-book-bookmark"></i>
-                    <span data-pt="Repositórios"
-                          data-en="Repositories">
-                        Repositórios
-                    </span>
+                    <span th:text="#{github.repositories}"></span>
                 </span>
-
                 <strong th:text="${github.public_repos} ?: 0">0</strong>
             </div>
 
             <div class="stat">
                 <span>
                     <i class="fa-solid fa-code-commit"></i>
-                    <span data-pt="Total de commits"
-                          data-en="Total commits">
-                        Total de commits
-                    </span>
+                    <span th:text="#{github.commits}"></span>
                 </span>
-
                 <strong th:text="${github.total_commits} ?: 0">0</strong>
             </div>
 
             <div class="stat">
                 <span>
                     <i class="fa-solid fa-users"></i>
-                    <span data-pt="Seguidores"
-                          data-en="Followers">
-                        Seguidores
-                    </span>
+                    <span th:text="#{github.followers}"></span>
                 </span>
-
                 <strong th:text="${github.followers} ?: 0">0</strong>
             </div>
 
             <div class="stat">
                 <span>
                     <i class="fa-solid fa-code"></i>
-                    <span data-pt="Principais linguagens"
-                          data-en="Top Languages">
-                        Principais linguagens
-                    </span>
+                    <span th:text="#{github.topLanguages}"></span>
                 </span>
             </div>
 
             <div class="top-languages">
-                <a href="https://nice-readme.vercel.app/top-langs"
-                   target="_blank"
-                   rel="noopener noreferrer">
-
-                    <img
-                            src="https://helio-github-stats.vercel.app/api/top-langs?username=TaroNukem&layout=pie&stats_format=percentages&theme=dark&hide_border=true&border_radius=5&card_width=466&locale=pt-br&hide_title=true&langs_count=10&size_weight=1"
-                            alt="Principais linguagens do GitHub"
-                            loading="lazy">
-
+                <a href="https://nice-readme.vercel.app/top-langs" target="_blank" rel="noopener noreferrer">
+                    <img src="https://helio-github-stats.vercel.app/api/top-langs?username=TaroNukem&layout=pie&stats_format=percentages&theme=dark&hide_border=true&border_radius=5&card_width=466&locale=pt-br&hide_title=true&langs_count=10&size_weight=1"
+                         alt="GitHub top languages" loading="lazy">
                 </a>
             </div>
-
         </div>
 
         <div class="card contato" id="contact">
-
-            <h2 data-pt="CONECTE-SE COMIGO"
-                data-en="CONNECT WITH ME">
-                CONECTE-SE COMIGO
-            </h2>
+            <h2 th:text="#{contact.heading}"></h2>
 
             <div class="contato-followers">
-
                 <i class="fa-solid fa-users contato-followers-icon"></i>
-
                 <strong th:text="${github.followers} ?: 0">0</strong>
-
-                <span data-pt="SEGUIDORES NO GITHUB"
-                      data-en="GITHUB FOLLOWERS">
-                    SEGUIDORES NO GITHUB
-                </span>
-
+                <span th:text="#{contact.githubFollowers}"></span>
             </div>
 
             <div class="contato-links">
-
-                <a href="https://github.com/TaroNukem"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="contato-botao">
-                    <i class="fa-brands fa-github"></i>
-                    GitHub
+                <a href="https://github.com/TaroNukem" target="_blank" rel="noopener noreferrer" class="contato-botao">
+                    <i class="fa-brands fa-github"></i> GitHub
                 </a>
-
-                <a href="https://www.linkedin.com/in/daniel-rolando-22061137a"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="contato-botao">
-                    <i class="fa-brands fa-linkedin"></i>
-                    LinkedIn
+                <a href="https://www.linkedin.com/in/daniel-rolando-22061137a" target="_blank" rel="noopener noreferrer" class="contato-botao">
+                    <i class="fa-brands fa-linkedin"></i> LinkedIn
                 </a>
-
-                <a href="mailto:danielgomesrolando@gmail.com"
-                   class="contato-botao">
-                    <i class="fa-solid fa-envelope"></i>
-                    Email
+                <a href="mailto:danielgomesrolando@gmail.com" class="contato-botao">
+                    <i class="fa-solid fa-envelope"></i> Email
                 </a>
-
-                <a th:href="@{/files/curriculo.pdf}"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="contato-botao">
+                <a th:href="@{/files/curriculo.pdf}" target="_blank" rel="noopener noreferrer" class="contato-botao">
                     <i class="fa-solid fa-file-lines"></i>
-                    <span data-pt="Currículo" data-en="Resume">Currículo</span>
+                    <span th:text="#{contact.resume}"></span>
                 </a>
-
             </div>
 
             <div class="contato-info">
-
                 <p>
                     <i class="fa-solid fa-envelope"></i>
-                    <strong data-pt="Email:" data-en="Email:">Email:</strong>
-                    <a href="mailto:danielgomesrolando@gmail.com">
-                        danielgomesrolando@gmail.com
-                    </a>
+                    <strong th:text="#{contact.email}"></strong>
+                    <a href="mailto:danielgomesrolando@gmail.com">danielgomesrolando@gmail.com</a>
                 </p>
-
                 <p>
                     <i class="fa-solid fa-phone"></i>
-                    <strong data-pt="Telefone:" data-en="Phone:">Telefone:</strong>
+                    <strong th:text="#{contact.phone}"></strong>
                     <span>(+55) 31 98539-5309</span>
                 </p>
-
                 <p>
                     <i class="fa-solid fa-location-dot"></i>
-                    <strong data-pt="Localização:" data-en="Location:">Localização:</strong>
-                    <span data-pt="Belo Horizonte, MG"
-                          data-en="Belo Horizonte, MG">
-                        Belo Horizonte, MG
-                    </span>
+                    <strong th:text="#{contact.location}"></strong>
+                    <span th:text="#{contact.city}"></span>
                 </p>
-
             </div>
-
         </div>
 
     </div>
@@ -487,141 +332,140 @@
     <div class="footer-main">
 
         <div class="footer-column">
-
-            <h3 data-pt="LINKS RÁPIDOS"
-                data-en="QUICK LINKS">
-                LINKS RÁPIDOS
-            </h3>
-
-            <a href="#profile" data-pt="Perfil" data-en="Profile">Perfil</a>
-            <a href="#projects" data-pt="Projetos" data-en="Projects">Projetos</a>
-            <a href="#experiences" data-pt="Experiências" data-en="Experience">Experiências</a>
-            <a href="#contact" data-pt="Contato" data-en="Contact">Contato</a>
-            <a href="#skills" data-pt="Habilidades" data-en="Skills">Habilidades</a>
-
+            <h3 th:text="#{footer.quickLinks}"></h3>
+            <a href="#profile" th:text="#{menu.profile}"></a>
+            <a href="#projects" th:text="#{menu.projects}"></a>
+            <a href="#experiences" th:text="#{menu.experiences}"></a>
+            <a href="#contact" th:text="#{menu.contact}"></a>
+            <a href="#skills" th:text="#{menu.skills}"></a>
         </div>
 
         <div class="footer-column">
-
-            <h3 data-pt="CONECTE-SE COMIGO"
-                data-en="CONNECT WITH ME">
-                CONECTE-SE COMIGO
-            </h3>
-
+            <h3 th:text="#{footer.connect}"></h3>
             <div class="footer-socials">
-
-                <a href="https://github.com/TaroNukem"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   aria-label="GitHub">
-                    <i class="fa-brands fa-github"></i>
-                </a>
-
-                <a href="https://www.linkedin.com/in/daniel-rolando-22061137a"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   aria-label="LinkedIn">
-                    <i class="fa-brands fa-linkedin"></i>
-                </a>
-
-                <a href="mailto:danielgomesrolando@gmail.com"
-                   aria-label="Email">
-                    <i class="fa-regular fa-envelope"></i>
-                </a>
-
+                <a href="https://github.com/TaroNukem" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/daniel-rolando-22061137a" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="mailto:danielgomesrolando@gmail.com" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
             </div>
-
         </div>
 
         <div class="footer-column footer-about">
-
-            <h3 data-pt="SOBRE"
-                data-en="ABOUT">
-                SOBRE
-            </h3>
-
-            <p
-                    data-pt="Portfólio inspirado na Steam para apresentar meus projetos e habilidades."
-                    data-en="A Steam-inspired portfolio showcasing my projects and skills.">
-                Portfólio inspirado na Steam para apresentar meus projetos e habilidades.
-            </p>
-
+            <h3 th:text="#{footer.about}"></h3>
+            <p th:text="#{footer.description}"></p>
         </div>
 
     </div>
 
     <div class="footer-bottom">
-
         <div class="footer-bottom-content">
-
-            <span
-                    data-pt="© 2026 Daniel Rolando. Todos os direitos reservados."
-                    data-en="© 2026 Daniel Rolando. All rights reserved.">
-                © 2026 Daniel Rolando. Todos os direitos reservados.
-            </span>
-
-            <span
-                    data-pt="Feito com inspiração no meu perfil da Steam 🎮"
-                    data-en="Made with inspiration from my Steam profile 🎮">
-                Feito com inspiração no meu perfil da Steam 🎮
-            </span>
-
+            <span th:text="#{footer.copyright}"></span>
+            <span th:text="#{footer.inspiration}"></span>
         </div>
-
     </div>
 
 </footer>
 
 <script>
-    function changeLanguage(language) {
-        document.querySelectorAll('[data-pt][data-en]').forEach(element => {
-            element.textContent = language === 'en'
-                ? element.dataset.en
-                : element.dataset.pt;
-        });
+    const profileMenuButton = document.getElementById('profileMenuButton');
+    const profileDropdown = document.getElementById('profileDropdown');
+    const languageMenuButton = document.getElementById('languageMenuButton');
+    const languageSubmenu = document.getElementById('languageSubmenu');
+    const openPixButton = document.getElementById('openPixButton');
+    const pixModal = document.getElementById('pixModal');
+    const closePixButton = document.getElementById('closePixButton');
 
-        document.querySelectorAll('[data-alt-pt][data-alt-en]').forEach(element => {
-            element.alt = language === 'en'
-                ? element.dataset.altEn
-                : element.dataset.altPt;
-        });
-
-        document.documentElement.lang = language;
-
-        document.querySelectorAll('.language-button').forEach(button => {
-            const active = button.dataset.language === language;
-
-            button.classList.toggle('active', active);
-            button.setAttribute('aria-pressed', String(active));
-        });
-
-        document.title = language === 'en'
-            ? "TaroNukem's Portfolio"
-            : "Portfólio de Daniel Rolando";
-
-        try {
-            localStorage.setItem('portfolio-language', language);
-        } catch (e) {
-            // A troca de idioma funciona mesmo se o armazenamento estiver indisponível.
-        }
+    function closeLanguageMenu() {
+        languageSubmenu.hidden = true;
+        languageMenuButton.setAttribute('aria-expanded', 'false');
     }
 
-    document.querySelectorAll('.language-button').forEach(button => {
-        button.addEventListener('click', event => {
-            event.preventDefault();
-            changeLanguage(button.dataset.language);
-        });
+    function closeProfileMenu() {
+        profileDropdown.hidden = true;
+        profileMenuButton.setAttribute('aria-expanded', 'false');
+        closeLanguageMenu();
+    }
+
+    function closePixModal() {
+        pixModal.hidden = true;
+        openPixButton.focus();
+    }
+
+    profileMenuButton.addEventListener('click', () => {
+        if (profileDropdown.hidden) {
+            profileDropdown.hidden = false;
+            profileMenuButton.setAttribute('aria-expanded', 'true');
+        } else {
+            closeProfileMenu();
+        }
     });
 
-    let savedLanguage = 'pt-BR';
+    languageMenuButton.addEventListener('click', () => {
+        const isOpen = !languageSubmenu.hidden;
+        languageSubmenu.hidden = isOpen;
+        languageMenuButton.setAttribute('aria-expanded', String(!isOpen));
+    });
 
-    try {
-        savedLanguage = localStorage.getItem('portfolio-language') || 'pt-BR';
-    } catch (e) {
-        savedLanguage = 'pt-BR';
-    }
+    openPixButton.addEventListener('click', () => {
+        pixModal.hidden = false;
+        closeProfileMenu();
+        closePixButton.focus();
+    });
 
-    changeLanguage(savedLanguage);
+    closePixButton.addEventListener('click', closePixModal);
+
+    pixModal.addEventListener('click', event => {
+        if (event.target === pixModal) closePixModal();
+    });
+
+    document.addEventListener('click', event => {
+        if (!event.target.closest('.profile-menu')) closeProfileMenu();
+    });
+
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+            closeProfileMenu();
+            if (!pixModal.hidden) closePixModal();
+        }
+    });
+
+    document.querySelectorAll('.language-option').forEach(link => {
+        link.addEventListener('click', async event => {
+            event.preventDefault();
+            closeProfileMenu();
+
+            try {
+                const response = await fetch(link.href, { credentials: 'same-origin' });
+                if (!response.ok) throw new Error('Erro ' + response.status);
+
+                const doc = new DOMParser().parseFromString(await response.text(), 'text/html');
+                const current = document.body.querySelectorAll('*');
+                const next = doc.body.querySelectorAll('*');
+                if (current.length !== next.length) throw new Error('Estrutura diferente');
+
+                current.forEach((el, i) => {
+                    const other = next[i];
+                    if (el.tagName === 'SCRIPT') return;
+
+                    if (!el.children.length && el.textContent !== other.textContent) {
+                        el.textContent = other.textContent;
+                    }
+
+                    ['alt', 'aria-label'].forEach(attr => {
+                        if (other.hasAttribute(attr)) el.setAttribute(attr, other.getAttribute(attr));
+                    });
+
+                    if (el.classList.contains('language-option')) {
+                        el.classList.toggle('active', other.classList.contains('active'));
+                    }
+                });
+
+                document.title = doc.title;
+                document.documentElement.lang = doc.documentElement.lang;
+            } catch (e) {
+                window.location.href = link.href;
+            }
+        });
+    });
 </script>
 
 </body>
