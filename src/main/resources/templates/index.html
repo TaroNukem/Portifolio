@@ -106,57 +106,57 @@
                 <span th:text="#{projects.heading}"></span>
             </h2>
 
-            <div class="timeline">
+            <div class="project-grid">
 
-                <div class="timeline-item">
-                    <span class="timeline-date" th:text="#{projects.games.date}"></span>
-                    <article class="project-card">
-                        <div class="project-preview">
-                            <img th:src="@{/images/biblioteca-jogos.png}" th:alt="#{projects.games.imageAlt}"
-                                 loading="lazy">
+                <article class="project-card">
+                    <div class="project-preview">
+                        <img th:src="@{/images/biblioteca-jogos.png}" th:alt="#{projects.games.imageAlt}"
+                             loading="lazy">
+                    </div>
+                    <div class="project-content">
+                        <h3 th:text="#{projects.games.title}"></h3>
+                        <p th:text="#{projects.games.description}"></p>
+                        <div class="project-technologies">
+                            <span>Java</span><span>Spring Boot</span><span>HTML</span><span>CSS</span><span>JavaScript</span>
                         </div>
-                        <div class="project-content">
-                            <span class="project-number" th:text="#{projects.number1}"></span>
-                            <h3 th:text="#{projects.games.title}"></h3>
-                            <p th:text="#{projects.games.description}"></p>
-                            <div class="project-technologies">
-                                <span>Java</span><span>Spring Boot</span><span>HTML</span><span>CSS</span><span>JavaScript</span>
-                            </div>
-                            <div class="project-actions">
-                                <a href="https://github.com/TaroNukem/Biblioteca-de-Jogos" target="_blank"
-                                   rel="noopener noreferrer" class="project-button">
-                                    <i class="fa-brands fa-github"></i>
-                                    <span th:text="#{projects.code}"></span>
-                                </a>
-                            </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/TaroNukem/Biblioteca-de-Jogos" target="_blank"
+                               rel="noopener noreferrer" class="project-button">
+                                <i class="fa-brands fa-github"></i>
+                                <span th:text="#{projects.code}"></span>
+                            </a>
                         </div>
-                    </article>
-                </div>
+                    </div>
+                    <div class="project-footer">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span th:text="#{projects.games.date}"></span>
+                    </div>
+                </article>
 
-                <div class="timeline-item">
-                    <span class="timeline-date" th:text="#{projects.portfolio.date}"></span>
-                    <article class="project-card">
-                        <div class="project-preview">
-                            <img th:src="@{/images/portfolio.png}" th:alt="#{projects.portfolio.imageAlt}"
-                                 loading="lazy">
+                <article class="project-card">
+                    <div class="project-preview">
+                        <img th:src="@{/images/portfolio.png}" th:alt="#{projects.portfolio.imageAlt}"
+                             loading="lazy">
+                    </div>
+                    <div class="project-content">
+                        <h3 th:text="#{projects.portfolio.title}"></h3>
+                        <p th:text="#{projects.portfolio.description}"></p>
+                        <div class="project-technologies">
+                            <span>Java</span><span>Spring Boot</span><span>Thymeleaf</span><span>HTML</span><span>CSS</span>
                         </div>
-                        <div class="project-content">
-                            <span class="project-number" th:text="#{projects.number2}"></span>
-                            <h3 th:text="#{projects.portfolio.title}"></h3>
-                            <p th:text="#{projects.portfolio.description}"></p>
-                            <div class="project-technologies">
-                                <span>Java</span><span>Spring Boot</span><span>Thymeleaf</span><span>HTML</span><span>CSS</span>
-                            </div>
-                            <div class="project-actions">
-                                <a href="https://github.com/TaroNukem/Portifolio" target="_blank"
-                                   rel="noopener noreferrer" class="project-button">
-                                    <i class="fa-brands fa-github"></i>
-                                    <span th:text="#{projects.code}"></span>
-                                </a>
-                            </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/TaroNukem/Portifolio" target="_blank"
+                               rel="noopener noreferrer" class="project-button">
+                                <i class="fa-brands fa-github"></i>
+                                <span th:text="#{projects.code}"></span>
+                            </a>
                         </div>
-                    </article>
-                </div>
+                    </div>
+                    <div class="project-footer">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span th:text="#{projects.portfolio.date}"></span>
+                    </div>
+                </article>
 
             </div>
         </div>

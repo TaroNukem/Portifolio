@@ -324,10 +324,17 @@ body {
     line-height: 1.7;
 }
 
+/* ===== Projetos ===== */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
 .project-card {
     min-width: 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     overflow: hidden;
     background: linear-gradient(135deg, rgba(27, 43, 55, 0.95), rgba(35, 29, 49, 0.98));
     border: 1px solid rgba(102, 192, 244, 0.2);
@@ -342,11 +349,11 @@ body {
 
 .project-preview {
     position: relative;
-    flex: 0 0 40%;
-    min-height: 220px;
+    flex: none;
+    height: 200px;
     overflow: hidden;
     background: linear-gradient(135deg, rgba(20, 65, 65, 0.65), rgba(55, 25, 65, 0.85));
-    border-right: 1px solid rgba(102, 192, 244, 0.15);
+    border-bottom: 1px solid rgba(102, 192, 244, 0.15);
 }
 
 .project-preview img {
@@ -364,11 +371,29 @@ body {
 }
 
 .project-content {
-    flex: 1;
+    flex: 1 0 auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 20px;
+}
+
+.project-footer {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    color: #9da5b4;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-top: 1px solid rgba(102, 192, 244, 0.15);
+    background: rgba(15, 12, 24, 0.35);
+}
+
+.project-footer i {
+    color: #66c0f4;
 }
 
 .project-number {
@@ -379,7 +404,7 @@ body {
 }
 
 .project-content h3 {
-    margin: 12px 0;
+    margin: 0 0 12px;
     color: #66c0f4;
     font-size: 23px;
 }
@@ -437,6 +462,18 @@ body {
     border-color: #1a9fff;
 }
 
+.project-button-primary {
+    color: #ffffff;
+    background: #1a9fff;
+    border-color: #1a9fff;
+}
+
+.project-button-primary:hover {
+    background: #3db0ff;
+    border-color: #3db0ff;
+}
+
+/* ===== Skills ===== */
 .skills {
     min-height: 200px;
     padding: 0;
@@ -496,6 +533,7 @@ body {
     transform: translateY(-2px);
 }
 
+/* ===== Atividade (WakaTime) ===== */
 .activity-header {
     justify-content: space-between;
     flex-wrap: wrap;
@@ -619,6 +657,7 @@ body {
     font-size: 14px;
 }
 
+/* ===== Coluna da direita ===== */
 .developer {
     min-height: 300px;
 }
@@ -765,6 +804,7 @@ body {
     color: #1a9fff;
 }
 
+/* ===== Footer ===== */
 .footer {
     width: 100%;
     margin-top: 60px;
@@ -857,6 +897,7 @@ body {
     font-size: 14px;
 }
 
+/* ===== Menu de opções ===== */
 .profile-menu {
     position: relative;
     margin-left: auto;
@@ -986,6 +1027,7 @@ body {
     visibility: visible;
 }
 
+/* ===== Modal Pix ===== */
 .pix-modal {
     position: fixed;
     inset: 0;
@@ -1072,6 +1114,7 @@ body {
     }
 }
 
+/* ===== Responsivo ===== */
 @media (max-width: 1200px) {
     .perfil {
         width: 90%;
@@ -1119,16 +1162,12 @@ body {
 }
 
 @media (max-width: 700px) {
-    .project-card {
-        flex-direction: column;
+    .project-grid {
+        grid-template-columns: 1fr;
     }
 
     .project-preview {
-        flex: none;
-        min-height: 0;
-        aspect-ratio: 16 / 9;
-        border-right: 0;
-        border-bottom: 1px solid rgba(102, 192, 244, 0.15);
+        height: 180px;
     }
 
     .project-content h3 {
