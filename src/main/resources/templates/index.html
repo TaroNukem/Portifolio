@@ -405,111 +405,124 @@
 </footer>
 
 <script>
-    const profileMenuButton = document.getElementById('profileMenuButton');
-    const profileDropdown = document.getElementById('profileDropdown');
-    const languageMenuButton = document.getElementById('languageMenuButton');
-    const languageSubmenu = document.getElementById('languageSubmenu');
-    const openPixButton = document.getElementById('openPixButton');
-    const pixModal = document.getElementById('pixModal');
-    const closePixButton = document.getElementById('closePixButton');
+    (() => {
+        // Delegação de eventos: os listeners continuam funcionando mesmo quando
+        // o conteúdo do body é substituído durante a troca de idioma.
+        let trocaIdiomaEmAndamento = false;
 
-    function closeLanguageMenu() {
-        languageSubmenu.hidden = true;
-        languageMenuButton.setAttribute('aria-expanded', 'false');
-    }
+        function fecharSubmenuIdioma() {
+            const submenu = document.getElementById('languageSubmenu');
+            const botao = document.getElementById('languageMenuButton');
 
-    function closeProfileMenu() {
-        profileDropdown.hidden = true;
-        profileMenuButton.setAttribute('aria-expanded', 'false');
-        closeLanguageMenu();
-    }
-
-    function closePixModal() {
-        pixModal.hidden = true;
-        openPixButton.focus();
-    }
-
-    profileMenuButton.addEventListener('click', () => {
-        if (profileDropdown.hidden) {
-            profileDropdown.hidden = false;
-            profileMenuButton.setAttribute('aria-expanded', 'true');
-        } else {
-            closeProfileMenu();
+            if (submenu) submenu.hidden = true;
+            if (botao) botao.setAttribute('aria-expanded', 'false');
         }
-    });
 
-    languageMenuButton.addEventListener('click', () => {
-        const isOpen = !languageSubmenu.hidden;
-        languageSubmenu.hidden = isOpen;
-        languageMenuButton.setAttribute('aria-expanded', String(!isOpen));
-    });
+        function fecharMenuPerfil() {
+            const menu = document.getElementById('profileDropdown');
+            const botao = document.getElementById('profileMenuButton');
 
-    openPixButton.addEventListener('click', () => {
-        pixModal.hidden = false;
-        closeProfileMenu();
-        closePixButton.focus();
-    });
-
-    closePixButton.addEventListener('click', closePixModal);
-
-    pixModal.addEventListener('click', event => {
-        if (event.target === pixModal) closePixModal();
-    });
-
-    document.addEventListener('click', event => {
-        if (!event.target.closest('.profile-menu')) closeProfileMenu();
-    });
-
-    document.addEventListener('keydown', event => {
-        if (event.key === 'Escape') {
-            closeProfileMenu();
-            if (!pixModal.hidden) closePixModal();
+            if (menu) menu.hidden = true;
+            if (botao) botao.setAttribute('aria-expanded', 'false');
+            fecharSubmenuIdioma();
         }
-    });
 
-    document.querySelectorAll('.language-option').forEach(link => {
-        link.addEventListener('click', async event => {
-            event.preventDefault();
-            closeProfileMenu();
+        function fecharModalPix() {
+            const modal = document.getElementById('pixModal');
+            if (modal) modal.hidden = true;
+        }
 
-            const scrollY = window.scrollY;
+        document.addEventListener('click', async (event) => {
+            const alvo = event.target instanceof Element ? event.target : null;
+            if (!alvo) return;
 
-            try {
-                const response = await fetch(link.href, {
-                    credentials: 'same-origin'
-                });
+            const botaoPerfil = alvo.closest('#profileMenuButton');
+            if (botaoPerfil) {
+                const menu = document.getElementById('profileDropdown');
+                if (!menu) return;
+                const abrir = menu.hidden;
+                menu.hidden = !abrir;
+                botaoPerfil.setAttribute('aria-expanded', String(abrir));
+                if (!abrir) fecharSubmenuIdioma();
+                return;
+            }
 
-                if (!response.ok) {
-                    throw new Error('Erro ' + response.status);
-                }
+            const botaoIdioma = alvo.closest('#languageMenuButton');
+            if (botaoIdioma) {
+                const submenu = document.getElementById('languageSubmenu');
+                if (!submenu) return;
+                const abrir = submenu.hidden;
+                submenu.hidden = !abrir;
+                botaoIdioma.setAttribute('aria-expanded', String(abrir));
+                return;
+            }
 
-                const html = await response.text();
-                const doc = new DOMParser().parseFromString(html, 'text/html');
+            const opcaoIdioma = alvo.closest('a.language-option');
+            if (opcaoIdioma) {
+                event.preventDefault();
+                if (trocaIdiomaEmAndamento) return;
+                trocaIdiomaEmAndamento = true;
+                const urlIdioma = opcaoIdioma.href;
+                const scrollY = window.scrollY;
+                fecharMenuPerfil();
 
-                document.title = doc.title;
-                document.documentElement.lang = doc.documentElement.lang;
-
-                document.body.innerHTML = doc.body.innerHTML;
-
-                document.querySelectorAll('script').forEach(oldScript => {
-                    const newScript = document.createElement('script');
-
-                    Array.from(oldScript.attributes).forEach(attribute => {
-                        newScript.setAttribute(attribute.name, attribute.value);
+                try {
+                    const resposta = await fetch(urlIdioma, {
+                        credentials: 'same-origin',
+                        headers: { 'X-Requested-With': 'XMLHttpRequest' }
                     });
+                    if (!resposta.ok) throw new Error('Erro HTTP ' + resposta.status);
 
-                    newScript.textContent = oldScript.textContent;
-                    oldScript.replaceWith(newScript);
-                });
+                    const html = await resposta.text();
+                    const documentoNovo = new DOMParser().parseFromString(html, 'text/html');
+                    if (!documentoNovo.body || !documentoNovo.body.innerHTML) {
+                        throw new Error('A resposta não contém uma página válida.');
+                    }
 
-                history.replaceState(null, '', link.href);
-                window.scrollTo(0, scrollY);
+                    document.title = documentoNovo.title;
+                    document.documentElement.lang = documentoNovo.documentElement.lang || 'pt-BR';
+                    document.body.innerHTML = documentoNovo.body.innerHTML;
+                    history.replaceState(null, '', urlIdioma);
+                    window.scrollTo(0, scrollY);
+                } catch (erro) {
+                    console.error('Não foi possível trocar o idioma sem recarregar:', erro);
+                    window.location.href = urlIdioma;
+                } finally {
+                    trocaIdiomaEmAndamento = false;
+                }
+                return;
+            }
 
-            } catch (error) {
-                window.location.href = link.href;
+            const abrirPix = alvo.closest('#openPixButton');
+            if (abrirPix) {
+                const modal = document.getElementById('pixModal');
+                if (modal) modal.hidden = false;
+                fecharMenuPerfil();
+                const fechar = document.getElementById('closePixButton');
+                if (fechar) fechar.focus();
+                return;
+            }
+
+            if (alvo.closest('#closePixButton')) {
+                fecharModalPix();
+                const botaoPix = document.getElementById('openPixButton');
+                if (botaoPix) botaoPix.focus();
+                return;
+            }
+
+            const modal = document.getElementById('pixModal');
+            if (modal && alvo === modal) fecharModalPix();
+
+            if (!alvo.closest('.profile-menu')) fecharMenuPerfil();
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                fecharMenuPerfil();
+                fecharModalPix();
             }
         });
-    });
+    })();
 </script>
 
 </body>
