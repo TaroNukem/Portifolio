@@ -467,6 +467,61 @@
         }
     });
 
+    // ===== Troca de idioma sem recarregar a página =====
+    function syncTexts(current, next) {
+        if (current.nodeType !== Node.ELEMENT_NODE) return;
+        if (current.tagName === 'SCRIPT' || current.tagName === 'VIDEO') return;
+
+        ['alt', 'aria-label', 'title'].forEach(attr => {
+            if (next.hasAttribute(attr) && current.getAttribute(attr) !== next.getAttribute(attr)) {
+                current.setAttribute(attr, next.getAttribute(attr));
+            }
+        });
+
+        if (current.classList.contains('language-option')) {
+            current.className = next.className;
+        }
+
+        const currentNodes = current.childNodes;
+        const nextNodes = next.childNodes;
+        if (currentNodes.length !== nextNodes.length) return;
+
+        for (let i = 0; i < currentNodes.length; i++) {
+            const a = currentNodes[i];
+            const b = nextNodes[i];
+            if (a.nodeType === Node.TEXT_NODE && b.nodeType === Node.TEXT_NODE) {
+                if (a.nodeValue !== b.nodeValue) a.nodeValue = b.nodeValue;
+            } else {
+                syncTexts(a, b);
+            }
+        }
+    }
+
+    async function switchLanguage(url) {
+        const response = await fetch(url, {credentials: 'same-origin'});
+        if (!response.ok) throw new Error('Falha ao trocar idioma');
+
+        const html = await response.text();
+        const newDoc = new DOMParser().parseFromString(html, 'text/html');
+
+        document.documentElement.lang = newDoc.documentElement.lang;
+        document.title = newDoc.title;
+        syncTexts(document.body, newDoc.body);
+    }
+
+    document.querySelectorAll('.language-option').forEach(link => {
+        link.addEventListener('click', async event => {
+            event.preventDefault();
+            const url = link.href;
+            try {
+                await switchLanguage(url);
+                closeProfileMenu();
+            } catch (error) {
+                window.location.href = url;
+            }
+        });
+    });
+
 </script>
 
 </body>
