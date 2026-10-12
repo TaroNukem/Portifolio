@@ -191,16 +191,36 @@
         </div>
 
         <div class="card languages">
-            <h2>
-                <i class="fa-solid fa-code"></i>
-                <span th:text="#{languages.heading}"></span>
+            <h2 class="activity-header">
+                <span class="activity-title">
+                    <i class="fa-solid fa-code"></i>
+                    <span th:text="#{languages.heading}"></span>
+                </span>
+                <span class="activity-total" th:text="#{languages.total(${waka.total})}"></span>
             </h2>
 
-            <div class="wakatime">
-                <a href="https://nice-readme.vercel.app/wakatime" target="_blank" rel="noopener noreferrer">
-                    <img src="https://helio-github-stats.vercel.app/api/wakatime?username=b860e6a6-2e86-4589-9069-df3ceeda98b1&card_width=650&line_height=30&layout=default&display_format=time&hide_title=true&langs_count=6&theme=dark&bg_color=000000&hide=Markdown,XML,Bash,Text,CSV,GitIgnore%20file,Git,JSON,YAML,TOML,Properties,Java%20Properties,Dockerfile"
-                         alt="WakaTime" loading="lazy">
-                </a>
+            <div class="activity-list">
+                <article class="activity-item" th:each="lang : ${waka.linguagens}">
+                    <div class="activity-main">
+                        <div class="activity-banner" th:classappend="${lang.slug}">
+                            <i th:class="${lang.icone}"></i>
+                        </div>
+                        <div class="activity-info">
+                            <h3 th:text="${lang.nome}"></h3>
+                            <div class="activity-time" th:text="${lang.tempo}"></div>
+                        </div>
+                    </div>
+                    <div class="activity-progress">
+                        <div class="activity-progress-top">
+                            <span th:text="#{languages.share}"></span>
+                            <span th:text="${lang.percentual} + '%'"></span>
+                        </div>
+                        <div class="activity-bar">
+                            <div class="activity-bar-fill" th:style="|width: ${lang.percentual}%|"></div>
+                        </div>
+                    </div>
+                </article>
+                <p class="activity-empty" th:if="${waka.linguagens.isEmpty()}" th:text="#{languages.empty}"></p>
             </div>
         </div>
 
@@ -271,12 +291,19 @@
                 </span>
             </div>
 
+
             <div class="top-languages">
-                <a href="https://nice-readme.vercel.app/top-langs" target="_blank" rel="noopener noreferrer">
-                    <img src="https://helio-github-stats.vercel.app/api/top-langs?username=TaroNukem&layout=pie&stats_format=percentages&theme=dark&hide_border=true&border_radius=5&card_width=466&locale=pt-br&hide_title=true&langs_count=10&size_weight=1"
-                         alt="GitHub top languages" loading="lazy">
+                <a href="https://github.com/TaroNukem"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <img
+                            src="https://github-readme-stats.vercel.app/api/top-langs/?username=TaroNukem&layout=pie&stats_format=percentages&theme=dark&hide_border=true&border_radius=5&card_width=466&locale=pt-br&hide_title=true&langs_count=10&size_weight=1"
+                            alt="Gráfico das linguagens mais utilizadas no GitHub"
+                            loading="lazy"
+                            onerror="this.style.display='none';">
                 </a>
             </div>
+
         </div>
 
         <div class="card contato" id="contact">

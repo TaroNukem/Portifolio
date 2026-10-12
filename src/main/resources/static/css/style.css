@@ -146,7 +146,7 @@ body {
     box-shadow: 0 0 6px rgba(26, 159, 255, 0.25);
 }
 
-.languages h2, .stats h2, .contato h2 {
+.stats h2, .contato h2 {
     margin-top: 0;
 }
 
@@ -209,22 +209,17 @@ body {
     line-height: 1.6;
 }
 
-.wakatime {
-    width: 100%;
-    max-width: 650px;
-}
-
 .top-languages {
     width: 100%;
     margin-top: 20px;
 }
 
-.wakatime a, .top-languages a {
+.top-languages a {
     display: block;
     width: 100%;
 }
 
-.wakatime img, .top-languages img {
+.top-languages img {
     display: block;
     width: 100%;
     height: auto;
@@ -234,7 +229,7 @@ body {
     min-height: 200px;
 }
 
-.projetos h2, .experiencias h2 {
+.projetos h2, .experiencias h2, .languages h2 {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -247,7 +242,7 @@ body {
     border-bottom: 1px solid rgba(102, 192, 244, 0.2);
 }
 
-.projetos h2 i, .experiencias h2 i, .skills h2 i {
+.projetos h2 i, .experiencias h2 i, .languages h2 i, .skills h2 i {
     color: #66c0f4;
 }
 
@@ -499,6 +494,129 @@ body {
     background: rgba(26, 159, 255, 0.15);
     border-color: #1a9fff;
     transform: translateY(-2px);
+}
+
+.activity-header {
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.activity-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.activity-total {
+    color: #aeb8c2;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.activity-item {
+    padding: 12px;
+    background: rgba(15, 12, 24, 0.55);
+    border: 1px solid rgba(102, 192, 244, 0.15);
+    border-radius: 5px;
+}
+
+.activity-main {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.activity-banner {
+    flex: 0 0 160px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 38px;
+    border-radius: 3px;
+}
+
+.activity-banner.lang-java {
+    background: linear-gradient(135deg, #e76f00, #6e3500);
+}
+
+.activity-banner.lang-html {
+    background: linear-gradient(135deg, #e34f26, #7d2510);
+}
+
+.activity-banner.lang-python {
+    background: linear-gradient(135deg, #3776ab 45%, #b8962a);
+}
+
+.activity-banner.lang-javascript {
+    background: linear-gradient(135deg, #f7df1e, #8a7a0a);
+    color: #1b1b1b;
+}
+
+.activity-info {
+    flex: 1;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px 12px;
+    align-items: start;
+}
+
+.activity-info h3 {
+    margin: 0;
+    color: #e5eef7;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.activity-time {
+    color: #aeb8c2;
+    font-size: 16px;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.activity-progress {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: rgba(40, 15, 45, 0.45);
+    border-radius: 3px;
+}
+
+.activity-progress-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+    color: #c7d5e0;
+    font-size: 13px;
+}
+
+.activity-bar {
+    height: 8px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+}
+
+.activity-bar-fill {
+    min-width: 4px;
+    height: 100%;
+    background: linear-gradient(90deg, #1a9fff, #66c0f4);
+    border-radius: 4px;
+}
+
+.activity-empty {
+    margin: 0;
+    color: #9da5b4;
+    font-size: 14px;
 }
 
 .developer {
@@ -980,10 +1098,6 @@ body {
         height: 160px;
     }
 
-    .wakatime {
-        max-width: 100%;
-    }
-
     .logoPUC img {
         width: 150px;
         height: 150px;
@@ -1091,6 +1205,20 @@ body {
 
     .info h5 {
         flex-wrap: wrap;
+    }
+
+    .activity-banner {
+        flex-basis: 90px;
+        height: 60px;
+        font-size: 30px;
+    }
+
+    .activity-info h3 {
+        font-size: 16px;
+    }
+
+    .activity-time {
+        font-size: 14px;
     }
 
     .skills {
