@@ -1,18 +1,57 @@
+/* =========================================================
+   VARIÁVEIS GLOBAIS
+   ========================================================= */
+:root {
+    --accent: #1a9fff;
+    --accent-light: #66c0f4;
+
+    /* Brilho único usado em TODOS os hovers (suave) */
+    --glow: 0 0 8px rgba(26, 159, 255, 0.2);
+
+    /* Animação de subida (mola bem leve) */
+    --lift: -3px;
+    --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+    /* Layout */
+    --topbar-h: 60px;
+    --page-width: min(75%, 1500px);
+    --card-pad: clamp(14px, 2vw, 20px);
+    --gap: clamp(12px, 1.6vw, 20px);
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
 * {
     box-sizing: border-box;
 }
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 75px;
+    scroll-padding-top: calc(var(--topbar-h) + 14px);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body {
     margin: 0;
     min-height: 100vh;
-    padding-top: 60px;
+    min-height: 100dvh;
+    padding-top: var(--topbar-h);
+    padding-bottom: env(safe-area-inset-bottom);
     font-family: Arial, sans-serif;
     color: white;
+    overflow-x: hidden;
+}
+
+img, video {
+    max-width: 100%;
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 2px;
 }
 
 .video-background {
@@ -34,6 +73,66 @@ body {
     pointer-events: none;
 }
 
+/* =========================================================
+   HOVER UNIFICADO
+   - Brilho: igual em todos os elementos interativos
+   - Subida animada: só nos itens pequenos/clicáveis
+   ========================================================= */
+.card,
+.project-card,
+.experience-card,
+.activity-item,
+.contato-followers,
+.profile-menu-button,
+.skill-tags span,
+.project-button,
+.contato-botao,
+.footer-socials a,
+.bio-foto > img {
+    transition: transform 0.35s var(--ease-spring),
+    box-shadow 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out),
+    background-color 0.3s var(--ease-out),
+    color 0.25s ease;
+}
+
+@media (hover: hover) {
+    /* Brilho (todos iguais) */
+    .card:hover,
+    .project-card:hover,
+    .experience-card:hover,
+    .activity-item:hover,
+    .contato-followers:hover,
+    .profile-menu-button:hover,
+    .skill-tags span:hover,
+    .project-button:hover,
+    .contato-botao:hover,
+    .footer-socials a:hover,
+    .bio-foto > img:hover {
+        border-color: var(--accent);
+        box-shadow: var(--glow);
+    }
+
+    /* Subida: foto, tags de habilidade, botões e redes sociais */
+    .bio-foto > img:hover,
+    .skill-tags span:hover,
+    .project-button:hover,
+    .contato-botao:hover,
+    .footer-socials a:hover {
+        transform: translateY(var(--lift));
+    }
+}
+
+/* Feedback ao clicar/tocar */
+.project-button:active,
+.contato-botao:active,
+.footer-socials a:active {
+    transform: translateY(0) scale(0.97);
+}
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
 .top-bar {
     position: fixed;
     top: 0;
@@ -41,10 +140,10 @@ body {
     z-index: 1000;
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: clamp(12px, 2vw, 28px);
     width: 100%;
-    height: 60px;
-    padding: 0 12%;
+    height: var(--topbar-h);
+    padding-inline: max(16px, calc((100% - var(--page-width)) / 2));
     background: rgba(23, 32, 44, 0.96);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -58,14 +157,14 @@ body {
 }
 
 .top-bar h1 a {
-    color: #1a9fff;
+    color: var(--accent);
     text-decoration: none;
     letter-spacing: 0.5px;
     transition: color 0.2s ease;
 }
 
 .top-bar h1 a:hover {
-    color: #66c0f4;
+    color: var(--accent-light);
 }
 
 .top-bar > a {
@@ -74,7 +173,7 @@ body {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    min-width: 120px;
+    min-width: clamp(90px, 8vw, 120px);
     height: 100%;
     color: #a7b0bb;
     text-decoration: none;
@@ -97,21 +196,24 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: #1a9fff;
-    transition: width 0.2s ease;
+    background: var(--accent);
+    transition: width 0.25s var(--ease-out);
 }
 
 .top-bar > a:hover::after {
     width: 100%;
 }
 
+/* =========================================================
+   LAYOUT PRINCIPAL
+   ========================================================= */
 .perfil {
-    width: 75%;
+    width: var(--page-width);
     margin: 0 auto;
-    padding: 20px;
+    padding: var(--card-pad);
     display: flex;
     align-items: flex-start;
-    gap: 20px;
+    gap: var(--gap);
     background: linear-gradient(120deg, rgba(20, 65, 65, 0.85), rgba(55, 25, 65, 0.90), rgba(110, 30, 75, 0.85));
     border-radius: 5px;
 }
@@ -120,7 +222,7 @@ body {
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: var(--gap);
 }
 
 .esquerda {
@@ -134,23 +236,14 @@ body {
 .card {
     width: 100%;
     min-width: 0;
-    padding: 20px;
+    padding: var(--card-pad);
     background: linear-gradient(120deg, rgba(25, 55, 60, 0.95), rgba(38, 30, 55, 0.95), rgba(55, 25, 55, 0.95));
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 5px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-    border-color: #1a9fff;
-    box-shadow: 0 0 6px rgba(26, 159, 255, 0.25);
 }
 
 .stats h2, .contato h2 {
     margin-top: 0;
-}
-
-.stats h2, .contato h2 {
     color: #d6d7d8;
     font-size: 18px;
 }
@@ -160,24 +253,22 @@ body {
     text-transform: uppercase;
 }
 
+/* =========================================================
+   PERFIL
+   ========================================================= */
 .bio-foto {
     display: flex;
     align-items: flex-start;
-    gap: 20px;
+    gap: var(--gap);
 }
 
 .bio-foto > img {
-    width: 200px;
-    height: 200px;
+    width: clamp(140px, 22vw, 200px);
+    height: clamp(140px, 22vw, 200px);
     flex-shrink: 0;
     object-fit: cover;
     border: 3px solid transparent;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.bio-foto > img:hover {
-    transform: translateY(-5px);
-    border-color: #007bff;
+    border-radius: 5px;
 }
 
 .info {
@@ -187,6 +278,8 @@ body {
 
 .info h1 {
     margin-top: 0;
+    font-size: clamp(24px, 4vw, 32px);
+    overflow-wrap: anywhere;
 }
 
 .info h3 {
@@ -201,7 +294,7 @@ body {
 }
 
 .info h5 i {
-    color: #66c0f4;
+    color: var(--accent-light);
 }
 
 .info p {
@@ -225,6 +318,9 @@ body {
     height: auto;
 }
 
+/* =========================================================
+   CABEÇALHOS DOS CARDS
+   ========================================================= */
 .projetos {
     min-height: 200px;
 }
@@ -233,8 +329,8 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin: -20px -20px 20px;
-    padding: 16px 20px;
+    margin: calc(var(--card-pad) * -1) calc(var(--card-pad) * -1) var(--card-pad);
+    padding: 16px var(--card-pad);
     font-size: 18px;
     font-weight: 500;
     color: #c7d5e0;
@@ -243,15 +339,18 @@ body {
 }
 
 .projetos h2 i, .experiencias h2 i, .languages h2 i, .skills h2 i {
-    color: #66c0f4;
+    color: var(--accent-light);
 }
 
+/* =========================================================
+   EXPERIÊNCIAS (TIMELINE)
+   ========================================================= */
 .timeline {
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 26px;
-    padding-left: 30px;
+    padding-left: clamp(22px, 4vw, 30px);
 }
 
 .timeline::before {
@@ -272,11 +371,11 @@ body {
 .timeline-item::before {
     content: "";
     position: absolute;
-    left: -30px;
+    left: calc(clamp(22px, 4vw, 30px) * -1);
     top: 3px;
     width: 14px;
     height: 14px;
-    background: #1a9fff;
+    background: var(--accent);
     border: 2px solid #1b2b37;
     border-radius: 50%;
     box-shadow: 0 0 0 2px rgba(102, 192, 244, 0.35);
@@ -285,29 +384,23 @@ body {
 .timeline-date {
     display: block;
     margin-bottom: 10px;
-    color: #66c0f4;
+    color: var(--accent-light);
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 1px;
 }
 
 .experience-card {
-    padding: 18px 20px;
+    padding: 18px clamp(14px, 2vw, 20px);
     background: linear-gradient(135deg, rgba(27, 43, 55, 0.95), rgba(35, 29, 49, 0.98));
     border: 1px solid rgba(102, 192, 244, 0.2);
     border-radius: 5px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.experience-card:hover {
-    border-color: #1a9fff;
-    box-shadow: 0 0 10px rgba(26, 159, 255, 0.12);
 }
 
 .experience-card h3 {
     margin: 0 0 4px;
-    color: #66c0f4;
-    font-size: 20px;
+    color: var(--accent-light);
+    font-size: clamp(17px, 2.4vw, 20px);
 }
 
 .experience-card h4 {
@@ -324,11 +417,13 @@ body {
     line-height: 1.7;
 }
 
-/* ===== Projetos ===== */
+/* =========================================================
+   PROJETOS
+   ========================================================= */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: var(--gap);
 }
 
 .project-card {
@@ -339,18 +434,12 @@ body {
     background: linear-gradient(135deg, rgba(27, 43, 55, 0.95), rgba(35, 29, 49, 0.98));
     border: 1px solid rgba(102, 192, 244, 0.2);
     border-radius: 5px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.project-card:hover {
-    border-color: #1a9fff;
-    box-shadow: 0 0 10px rgba(26, 159, 255, 0.12);
 }
 
 .project-preview {
     position: relative;
     flex: none;
-    height: 200px;
+    aspect-ratio: 11 / 5;
     overflow: hidden;
     background: linear-gradient(135deg, rgba(20, 65, 65, 0.65), rgba(55, 25, 65, 0.85));
     border-bottom: 1px solid rgba(102, 192, 244, 0.15);
@@ -363,11 +452,13 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s var(--ease-out);
 }
 
-.project-card:hover .project-preview img {
-    transform: scale(1.03);
+@media (hover: hover) {
+    .project-card:hover .project-preview img {
+        transform: scale(1.05);
+    }
 }
 
 .project-content {
@@ -375,38 +466,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 20px;
-}
-
-.project-footer {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 20px;
-    color: #9da5b4;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    border-top: 1px solid rgba(102, 192, 244, 0.15);
-    background: rgba(15, 12, 24, 0.35);
-}
-
-.project-footer i {
-    color: #66c0f4;
-}
-
-.project-number {
-    color: #9da5b4;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
+    padding: var(--card-pad);
 }
 
 .project-content h3 {
     margin: 0 0 12px;
-    color: #66c0f4;
-    font-size: 23px;
+    color: var(--accent-light);
+    font-size: clamp(19px, 2.6vw, 23px);
 }
 
 .project-content p {
@@ -425,9 +491,9 @@ body {
 
 .project-technologies span {
     padding: 9px 13px;
-    color: #66c0f4;
+    color: var(--accent-light);
     background: rgba(26, 159, 255, 0.12);
-    border: 1px solid #1a9fff;
+    border: 1px solid var(--accent);
     border-radius: 4px;
     font-size: 12px;
     font-weight: 600;
@@ -447,33 +513,55 @@ body {
     gap: 9px;
     padding: 12px 18px;
     color: #c7d5e0;
-    background: rgba(30, 40, 60, 0.8);
+    background-color: rgba(30, 40, 60, 0.8);
     border: 1px solid rgba(102, 192, 244, 0.25);
     border-radius: 4px;
     font-size: 14px;
     font-weight: 700;
     text-decoration: none;
-    transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-.project-button:hover {
-    color: #ffffff;
-    background: rgba(26, 159, 255, 0.18);
-    border-color: #1a9fff;
+@media (hover: hover) {
+    .project-button:hover {
+        color: #ffffff;
+        background-color: rgba(26, 159, 255, 0.18);
+    }
 }
 
 .project-button-primary {
     color: #ffffff;
-    background: #1a9fff;
-    border-color: #1a9fff;
+    background-color: var(--accent);
+    border-color: var(--accent);
 }
 
-.project-button-primary:hover {
-    background: #3db0ff;
-    border-color: #3db0ff;
+@media (hover: hover) {
+    .project-button-primary:hover {
+        background-color: #3db0ff;
+        border-color: #3db0ff;
+    }
 }
 
-/* ===== Skills ===== */
+.project-footer {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px var(--card-pad);
+    color: #9da5b4;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-top: 1px solid rgba(102, 192, 244, 0.15);
+    background: rgba(15, 12, 24, 0.35);
+}
+
+.project-footer i {
+    color: var(--accent-light);
+}
+
+/* =========================================================
+   HABILIDADES
+   ========================================================= */
 .skills {
     min-height: 200px;
     padding: 0;
@@ -520,20 +608,21 @@ body {
     padding: 10px 14px;
     color: #d6dce5;
     font-size: 14px;
-    background: rgba(120, 65, 125, 0.12);
+    background-color: rgba(120, 65, 125, 0.12);
     border: 1px solid #805080;
     border-radius: 3px;
-    transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
-.skill-tags span:hover {
-    color: #ffffff;
-    background: rgba(26, 159, 255, 0.15);
-    border-color: #1a9fff;
-    transform: translateY(-2px);
+@media (hover: hover) {
+    .skill-tags span:hover {
+        color: #ffffff;
+        background-color: rgba(26, 159, 255, 0.15);
+    }
 }
 
-/* ===== Atividade (WakaTime) ===== */
+/* =========================================================
+   ATIVIDADE (WAKATIME)
+   ========================================================= */
 .activity-header {
     justify-content: space-between;
     flex-wrap: wrap;
@@ -571,7 +660,7 @@ body {
 }
 
 .activity-banner {
-    flex: 0 0 160px;
+    flex: 0 0 clamp(80px, 22%, 160px);
     height: 70px;
     display: flex;
     align-items: center;
@@ -612,6 +701,7 @@ body {
     color: #e5eef7;
     font-size: 18px;
     font-weight: 500;
+    overflow-wrap: anywhere;
 }
 
 .activity-time {
@@ -647,7 +737,7 @@ body {
 .activity-bar-fill {
     min-width: 4px;
     height: 100%;
-    background: linear-gradient(90deg, #1a9fff, #66c0f4);
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
     border-radius: 4px;
 }
 
@@ -657,7 +747,9 @@ body {
     font-size: 14px;
 }
 
-/* ===== Coluna da direita ===== */
+/* =========================================================
+   COLUNA DA DIREITA
+   ========================================================= */
 .developer {
     min-height: 300px;
 }
@@ -670,8 +762,9 @@ body {
 }
 
 .logoPUC img {
-    width: 180px;
-    height: 180px;
+    width: clamp(130px, 40%, 180px);
+    height: auto;
+    aspect-ratio: 1;
     object-fit: contain;
 }
 
@@ -704,7 +797,7 @@ body {
 }
 
 .stat strong {
-    color: #66c0f4;
+    color: var(--accent-light);
     font-size: 20px;
 }
 
@@ -714,7 +807,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid #1a9fff;
+    border: 1px solid var(--accent);
     border-radius: 5px;
     background: rgba(30, 40, 65, 0.7);
 }
@@ -726,8 +819,8 @@ body {
 }
 
 .contato-followers strong {
-    font-size: 42px;
-    color: #66c0f4;
+    font-size: clamp(34px, 5vw, 42px);
+    color: var(--accent-light);
 }
 
 .contato-followers span {
@@ -735,11 +828,12 @@ body {
     color: #9da5b4;
     font-size: 14px;
     letter-spacing: 1px;
+    text-align: center;
 }
 
 .contato-links {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 110px), 1fr));
     gap: 10px;
     margin-top: 20px;
 }
@@ -754,20 +848,20 @@ body {
     text-align: center;
     text-decoration: none;
     color: #d6d7d8;
-    background: rgba(30, 40, 60, 0.8);
+    background-color: rgba(30, 40, 60, 0.8);
     border: 1px solid rgba(102, 192, 244, 0.25);
     border-radius: 5px;
-    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
 .contato-botao i {
     font-size: 17px;
 }
 
-.contato-botao:hover {
-    color: white;
-    border-color: #1a9fff;
-    background: rgba(26, 159, 255, 0.15);
+@media (hover: hover) {
+    .contato-botao:hover {
+        color: white;
+        background-color: rgba(26, 159, 255, 0.15);
+    }
 }
 
 .contato-info {
@@ -796,15 +890,18 @@ body {
 }
 
 .contato-info a {
-    color: #66c0f4;
+    color: var(--accent-light);
     text-decoration: none;
+    transition: color 0.2s ease;
 }
 
 .contato-info a:hover {
-    color: #1a9fff;
+    color: var(--accent);
 }
 
-/* ===== Footer ===== */
+/* =========================================================
+   FOOTER
+   ========================================================= */
 .footer {
     width: 100%;
     margin-top: 60px;
@@ -813,15 +910,16 @@ body {
 }
 
 .footer-main {
-    width: 75%;
+    width: var(--footer-width, var(--page-width));
     margin: 0 auto;
-    padding: 55px 0;
+    padding: clamp(35px, 5vw, 55px) 0;
     display: grid;
     grid-template-columns: 1fr 1fr 1.2fr;
-    gap: 50px;
+    gap: clamp(30px, 4vw, 50px);
 }
 
 .footer-column {
+    min-width: 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -829,8 +927,8 @@ body {
 
 .footer-column h3 {
     margin: 0 0 22px;
-    color: #66c0f4;
-    font-size: 20px;
+    color: var(--accent-light);
+    font-size: clamp(17px, 2vw, 20px);
     font-weight: 700;
     letter-spacing: 0.5px;
 }
@@ -849,6 +947,7 @@ body {
 
 .footer-socials {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
 }
 
@@ -861,17 +960,16 @@ body {
     color: #a9a2b1;
     font-size: 28px;
     text-decoration: none;
-    background: rgba(30, 40, 60, 0.8);
+    background-color: rgba(30, 40, 60, 0.8);
     border: 1px solid rgba(102, 192, 244, 0.25);
     border-radius: 5px;
-    transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
-.footer-socials a:hover {
-    color: #ffffff;
-    background: rgba(26, 159, 255, 0.15);
-    border-color: #1a9fff;
-    transform: translateY(-3px);
+@media (hover: hover) {
+    .footer-socials a:hover {
+        color: #ffffff;
+        background-color: rgba(26, 159, 255, 0.15);
+    }
 }
 
 .footer-about p {
@@ -886,18 +984,21 @@ body {
 }
 
 .footer-bottom-content {
-    width: 75%;
+    width: var(--footer-width, var(--page-width));
     min-height: 68px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 24px;
+    gap: 8px 24px;
+    padding: 12px 0;
     color: #9da5b4;
     font-size: 14px;
 }
 
-/* ===== Menu de opções ===== */
+/* =========================================================
+   MENU DE OPÇÕES
+   ========================================================= */
 .profile-menu {
     position: relative;
     margin-left: auto;
@@ -910,24 +1011,24 @@ body {
     gap: 10px;
     padding: 10px 14px;
     color: #d6d7d8;
-    background: rgba(30, 40, 60, .8);
-    border: 1px solid rgba(102, 192, 244, .25);
+    background-color: rgba(30, 40, 60, 0.8);
+    border: 1px solid rgba(102, 192, 244, 0.25);
     border-radius: 4px;
     font-size: 13px;
     font-weight: 600;
     white-space: nowrap;
     cursor: pointer;
-    transition: background .2s ease, border-color .2s ease;
 }
 
-.profile-menu-button:hover, .profile-menu-button[aria-expanded="true"] {
-    background: rgba(26, 159, 255, .15);
-    border-color: #1a9fff;
+.profile-menu-button:hover,
+.profile-menu-button[aria-expanded="true"] {
+    background-color: rgba(26, 159, 255, 0.15);
+    border-color: var(--accent);
 }
 
 .menu-arrow {
     font-size: 10px;
-    transition: transform .2s ease;
+    transition: transform 0.2s ease;
 }
 
 .profile-menu-button[aria-expanded="true"] .menu-arrow {
@@ -939,17 +1040,22 @@ body {
     top: calc(100% + 6px);
     right: 0;
     z-index: 1100;
-    width: 270px;
+    width: min(270px, calc(100vw - 24px));
+    max-height: calc(100vh - var(--topbar-h) - 20px);
+    max-height: calc(100dvh - var(--topbar-h) - 20px);
+    overflow-y: auto;
     padding: 8px;
     color: #d6d7d8;
-    background: linear-gradient(110deg, rgba(20, 45, 52, .98), rgba(35, 30, 52, .98), rgba(42, 24, 48, .98));
-    border: 1px solid rgba(102, 192, 244, .25);
+    background: linear-gradient(110deg, rgba(20, 45, 52, 0.98), rgba(35, 30, 52, 0.98), rgba(42, 24, 48, 0.98));
+    border: 1px solid rgba(102, 192, 244, 0.25);
     border-radius: 4px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, .45);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(12px);
 }
 
-.profile-dropdown[hidden], .language-submenu[hidden], .pix-modal[hidden] {
+.profile-dropdown[hidden],
+.language-submenu[hidden],
+.pix-modal[hidden] {
     display: none !important;
 }
 
@@ -969,24 +1075,24 @@ body {
     text-align: left;
     text-decoration: none;
     cursor: pointer;
-    transition: background .15s ease, color .15s ease;
+    transition: background 0.15s ease, color 0.15s ease;
 }
 
 .dropdown-item > i:first-child {
     width: 17px;
-    color: #66c0f4;
+    color: var(--accent-light);
     text-align: center;
 }
 
 .dropdown-item:hover {
     color: #fff;
-    background: rgba(26, 159, 255, .15);
+    background: rgba(26, 159, 255, 0.15);
 }
 
 .external-icon {
     margin-left: auto;
     font-size: 11px;
-    opacity: .6;
+    opacity: 0.6;
 }
 
 .dropdown-section {
@@ -996,29 +1102,29 @@ body {
 .submenu-arrow {
     margin-left: auto;
     font-size: 11px;
-    opacity: .7;
+    opacity: 0.7;
 }
 
 .dropdown-divider {
     height: 1px;
     margin: 7px 4px;
-    background: rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, 0.12);
 }
 
 .language-submenu {
     margin: 2px 0 5px 16px;
     padding-left: 8px;
-    border-left: 1px solid rgba(102, 192, 244, .25);
+    border-left: 1px solid rgba(102, 192, 244, 0.25);
 }
 
 .language-option.active {
     color: #fff;
-    background: rgba(26, 159, 255, .13);
+    background: rgba(26, 159, 255, 0.13);
 }
 
 .language-check {
     margin-left: auto;
-    color: #66c0f4;
+    color: var(--accent-light);
     font-size: 12px;
     visibility: hidden;
 }
@@ -1027,7 +1133,9 @@ body {
     visibility: visible;
 }
 
-/* ===== Modal Pix ===== */
+/* =========================================================
+   MODAL PIX
+   ========================================================= */
 .pix-modal {
     position: fixed;
     inset: 0;
@@ -1036,7 +1144,8 @@ body {
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background: rgba(0, 0, 0, .75);
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(5px);
 }
 
@@ -1044,17 +1153,19 @@ body {
     position: relative;
     width: 100%;
     max-width: 360px;
+    max-height: 100%;
+    margin: auto;
     padding: 30px 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
     color: #d6d7d8;
     text-align: center;
-    background: linear-gradient(135deg, rgba(25, 55, 60, .99), rgba(38, 30, 55, .99), rgba(55, 25, 55, .99));
-    border: 1px solid rgba(102, 192, 244, .25);
+    background: linear-gradient(135deg, rgba(25, 55, 60, 0.99), rgba(38, 30, 55, 0.99), rgba(55, 25, 55, 0.99));
+    border: 1px solid rgba(102, 192, 244, 0.25);
     border-radius: 6px;
-    box-shadow: 0 15px 45px rgba(0, 0, 0, .5);
-    animation: pix-appear .2s ease;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+    animation: pix-appear 0.25s var(--ease-spring);
 }
 
 .pix-close-button {
@@ -1069,15 +1180,16 @@ body {
     border-radius: 4px;
     font-size: 20px;
     cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease;
 }
 
 .pix-close-button:hover {
     color: #fff;
-    background: rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .pix-title-icon {
-    color: #66c0f4;
+    color: var(--accent-light);
     font-size: 30px;
 }
 
@@ -1095,7 +1207,7 @@ body {
 .pix-qr-code {
     display: block;
     width: 100%;
-    max-width: 240px;
+    max-width: min(240px, 60vw);
     height: auto;
     margin-top: 15px;
     padding: 10px;
@@ -1106,7 +1218,7 @@ body {
 @keyframes pix-appear {
     from {
         opacity: 0;
-        transform: translateY(8px) scale(.98);
+        transform: translateY(10px) scale(0.96);
     }
     to {
         opacity: 1;
@@ -1114,113 +1226,98 @@ body {
     }
 }
 
-/* ===== Responsivo ===== */
-@media (max-width: 1200px) {
-    .perfil {
-        width: 90%;
-    }
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
 
-    .top-bar {
-        padding: 0 6%;
+/* Telas muito grandes: só segura a largura máxima */
+@media (min-width: 1800px) {
+    :root {
+        --page-width: min(70%, 1500px);
     }
 }
 
-@media (max-width: 900px) {
+/* Notebooks pequenos */
+@media (max-width: 1200px) {
+    :root {
+        --page-width: 90%;
+    }
+}
+
+/* Top bar em duas linhas: logo + menu em cima, links embaixo */
+@media (max-width: 1100px) {
+    :root {
+        --topbar-h: 96px;
+    }
+
+    .top-bar {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        grid-template-rows: 52px 44px;
+        gap: 0;
+        align-items: center;
+        padding-inline: max(14px, calc((100% - var(--page-width)) / 2));
+    }
+
+    .top-bar h1 {
+        grid-area: 1 / 1 / 2 / 5;
+        margin: 0;
+        font-size: 18px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .profile-menu {
+        grid-area: 1 / 5 / 2 / 6;
+        justify-self: end;
+        margin-left: 0;
+    }
+
+    .top-bar > a {
+        grid-row: 2;
+        min-width: 0;
+        padding: 0 4px;
+        font-size: 12px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+}
+
+/* Tablets: uma coluna só */
+@media (max-width: 960px) {
+    :root {
+        --page-width: 94%;
+    }
+
     .perfil {
-        width: 94%;
         flex-direction: column;
-        padding: 15px;
     }
 
     .esquerda, .direita {
         width: 100%;
+        flex: none;
     }
 
-    .bio-foto > img {
-        width: 160px;
-        height: 160px;
-    }
-
-    .logoPUC img {
-        width: 150px;
-        height: 150px;
+    .developer,
+    .stats,
+    .skills,
+    .projetos {
+        min-height: 0;
     }
 
     .footer-main {
-        width: 90%;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 35px;
     }
 
     .footer-about {
         grid-column: 1 / -1;
     }
-
-    .footer-bottom-content {
-        width: 90%;
-    }
 }
 
-@media (max-width: 700px) {
-    .project-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .project-preview {
-        height: 180px;
-    }
-
-    .project-content h3 {
-        font-size: 21px;
-    }
-}
-
-@media (max-width: 600px) {
-    html {
-        scroll-padding-top: 66px;
-    }
-
-    body {
-        padding-top: 56px;
-    }
-
-    .top-bar {
-        height: 56px;
-        padding: 0 12px;
-        gap: 14px;
-        justify-content: space-between;
-    }
-
-    .top-bar h1 {
-        margin: 0;
-        font-size: 15px;
-    }
-
-    .top-bar > a {
-        font-size: 10px;
-        letter-spacing: 0;
-    }
-
-    .perfil {
-        width: 100%;
-        margin: 0;
-        padding: 12px;
-        gap: 15px;
-        border-radius: 0;
-    }
-
-    .esquerda, .direita {
-        gap: 15px;
-    }
-
-    .card {
-        padding: 15px;
-    }
-
+/* Celulares grandes */
+@media (max-width: 640px) {
     .bio-foto {
         flex-direction: column;
         align-items: center;
-        gap: 15px;
     }
 
     .bio-foto > img {
@@ -1233,7 +1330,6 @@ body {
     }
 
     .info h1 {
-        font-size: 25px;
         text-align: center;
     }
 
@@ -1246,22 +1342,39 @@ body {
         flex-wrap: wrap;
     }
 
-    .activity-banner {
-        flex-basis: 90px;
-        height: 60px;
-        font-size: 30px;
+    .project-technologies span {
+        padding: 8px 11px;
     }
 
-    .activity-info h3 {
-        font-size: 16px;
+    .project-actions .project-button {
+        flex: 1 1 auto;
+    }
+}
+
+/* Celulares */
+@media (max-width: 600px) {
+    :root {
+        --page-width: 100%;
+        --footer-width: 90%;
+        --topbar-h: 90px;
     }
 
-    .activity-time {
-        font-size: 14px;
+    .top-bar {
+        grid-template-rows: 48px 42px;
+        padding-inline: 12px;
     }
 
-    .skills {
-        padding: 0;
+    .top-bar h1 {
+        font-size: 15px;
+    }
+
+    .top-bar > a {
+        font-size: 11px;
+        letter-spacing: 0;
+    }
+
+    .perfil {
+        border-radius: 0;
     }
 
     .skills h2 {
@@ -1286,6 +1399,19 @@ body {
         font-size: 12px;
     }
 
+    .activity-banner {
+        height: 60px;
+        font-size: 30px;
+    }
+
+    .activity-info h3 {
+        font-size: 16px;
+    }
+
+    .activity-time {
+        font-size: 14px;
+    }
+
     .stat {
         padding: 14px 0;
     }
@@ -1305,11 +1431,11 @@ body {
 
     .contato-botao {
         padding: 12px 6px;
-        font-size: 12px;
+        font-size: 13px;
     }
 
     .contato-info p {
-        font-size: 12px;
+        font-size: 13px;
     }
 
     .footer {
@@ -1317,8 +1443,6 @@ body {
     }
 
     .footer-main {
-        width: 90%;
-        padding: 35px 0;
         grid-template-columns: 1fr;
         gap: 30px;
     }
@@ -1329,7 +1453,6 @@ body {
 
     .footer-column h3 {
         margin-bottom: 16px;
-        font-size: 17px;
     }
 
     .footer-column > a {
@@ -1352,34 +1475,127 @@ body {
     }
 
     .footer-bottom-content {
-        width: 90%;
-        padding: 18px 0;
-        gap: 10px;
         flex-direction: column;
         align-items: flex-start;
+        gap: 6px;
         font-size: 12px;
     }
 
     .profile-menu-button {
         gap: 7px;
-        padding: 9px;
+        padding: 9px 11px;
         font-size: 12px;
-    }
-
-    .profile-dropdown {
-        width: min(270px, calc(100vw - 24px));
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
+/* Celulares pequenos: links ficam "justificados" e o menu vira só ícone */
+@media (max-width: 520px) {
+    :root {
+        --topbar-h: 88px;
     }
 
-    .project-card, .project-preview img, .project-button {
+    .top-bar {
+        grid-template-columns: repeat(5, auto);
+        grid-template-rows: 48px 40px;
+        justify-content: space-between;
+        padding-inline: 10px;
+    }
+
+    .top-bar > a {
+        padding: 0 3px;
+        font-size: clamp(8.5px, 2.6vw, 11px);
+    }
+
+    .profile-menu-button > span {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+    }
+
+    .activity-main {
+        gap: 10px;
+    }
+
+    .activity-banner {
+        flex-basis: 70px;
+        height: 54px;
+        font-size: 26px;
+    }
+
+    .activity-info {
+        grid-template-columns: 1fr;
+    }
+
+    .activity-time {
+        text-align: left;
+        white-space: normal;
+    }
+
+    .contato-links {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Telas muito estreitas */
+@media (max-width: 360px) {
+    .top-bar {
+        padding-inline: 6px;
+    }
+
+    .top-bar > a {
+        padding: 0 2px;
+        font-size: 8px;
+    }
+
+    .bio-foto > img {
+        width: 130px;
+        height: 130px;
+    }
+
+    .project-button,
+    .contato-botao {
+        font-size: 12px;
+    }
+
+    .contato-links {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Celular deitado (pouca altura): barra mais baixa */
+@media (max-height: 480px) and (orientation: landscape) {
+    .profile-dropdown {
+        max-height: calc(100vh - var(--topbar-h) - 10px);
+    }
+
+    .pix-modal {
+        align-items: flex-start;
+    }
+}
+
+/* =========================================================
+   ACESSIBILIDADE: reduzir movimento
+   Mantém a subida de 3px e o brilho (movimento mínimo),
+   mas tira o resto: scroll suave, zoom nas imagens e modal animado.
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --ease-spring: cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .project-preview img {
         transition: none;
+    }
+
+    .project-card:hover .project-preview img {
+        transform: none;
     }
 
     .pix-modal-content {
