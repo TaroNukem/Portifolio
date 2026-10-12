@@ -19,31 +19,36 @@
     <a href="#contact" th:text="#{menu.contact}"></a>
 
     <div class="profile-menu">
-        <button class="profile-menu-button" id="profileMenuButton" type="button" aria-expanded="false" aria-controls="profileDropdown">
+        <button class="profile-menu-button" id="profileMenuButton" type="button" aria-expanded="false"
+                aria-controls="profileDropdown">
             <i class="fa-solid fa-user-gear"></i>
             <span th:text="#{menu.options}"></span>
             <i class="fa-solid fa-chevron-down menu-arrow"></i>
         </button>
 
         <div class="profile-dropdown" id="profileDropdown" hidden>
-            <a href="https://github.com/TaroNukem/Portifolio" target="_blank" rel="noopener noreferrer" class="dropdown-item">
+            <a href="https://github.com/TaroNukem/Portifolio" target="_blank" rel="noopener noreferrer"
+               class="dropdown-item">
                 <i class="fa-solid fa-code"></i>
                 <span th:text="#{menu.projectDetails}"></span>
                 <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
             </a>
 
             <div class="dropdown-section">
-                <button type="button" class="dropdown-item dropdown-toggle" id="languageMenuButton" aria-expanded="false" aria-controls="languageSubmenu">
+                <button type="button" class="dropdown-item dropdown-toggle" id="languageMenuButton"
+                        aria-expanded="false" aria-controls="languageSubmenu">
                     <i class="fa-solid fa-globe"></i>
                     <span th:text="#{menu.changeLanguage}"></span>
                     <i class="fa-solid fa-chevron-right submenu-arrow"></i>
                 </button>
 
                 <div class="language-submenu" id="languageSubmenu" hidden>
-                    <a class="dropdown-item language-option" th:classappend="${#locale.language == 'pt'} ? 'active'" th:href="@{/(lang='pt-BR')}">
+                    <a class="dropdown-item language-option" th:classappend="${#locale.language == 'pt'} ? 'active'"
+                       th:href="@{/(lang='pt-BR')}">
                         <span>🇧🇷</span><span>Português</span><i class="fa-solid fa-check language-check"></i>
                     </a>
-                    <a class="dropdown-item language-option" th:classappend="${#locale.language == 'en'} ? 'active'" th:href="@{/(lang='en')}">
+                    <a class="dropdown-item language-option" th:classappend="${#locale.language == 'en'} ? 'active'"
+                       th:href="@{/(lang='en')}">
                         <span>🇺🇸</span><span>English</span><i class="fa-solid fa-check language-check"></i>
                     </a>
                 </div>
@@ -107,7 +112,8 @@
                     <span class="timeline-date" th:text="#{projects.games.date}"></span>
                     <article class="project-card">
                         <div class="project-preview">
-                            <img th:src="@{/images/biblioteca-jogos.png}" th:alt="#{projects.games.imageAlt}" loading="lazy">
+                            <img th:src="@{/images/biblioteca-jogos.png}" th:alt="#{projects.games.imageAlt}"
+                                 loading="lazy">
                         </div>
                         <div class="project-content">
                             <span class="project-number" th:text="#{projects.number1}"></span>
@@ -117,7 +123,8 @@
                                 <span>Java</span><span>Spring Boot</span><span>HTML</span><span>CSS</span><span>JavaScript</span>
                             </div>
                             <div class="project-actions">
-                                <a href="https://github.com/TaroNukem/Biblioteca-de-Jogos" target="_blank" rel="noopener noreferrer" class="project-button">
+                                <a href="https://github.com/TaroNukem/Biblioteca-de-Jogos" target="_blank"
+                                   rel="noopener noreferrer" class="project-button">
                                     <i class="fa-brands fa-github"></i>
                                     <span th:text="#{projects.code}"></span>
                                 </a>
@@ -130,7 +137,8 @@
                     <span class="timeline-date" th:text="#{projects.portfolio.date}"></span>
                     <article class="project-card">
                         <div class="project-preview">
-                            <img th:src="@{/images/portfolio.png}" th:alt="#{projects.portfolio.imageAlt}" loading="lazy">
+                            <img th:src="@{/images/portfolio.png}" th:alt="#{projects.portfolio.imageAlt}"
+                                 loading="lazy">
                         </div>
                         <div class="project-content">
                             <span class="project-number" th:text="#{projects.number2}"></span>
@@ -140,7 +148,8 @@
                                 <span>Java</span><span>Spring Boot</span><span>Thymeleaf</span><span>HTML</span><span>CSS</span>
                             </div>
                             <div class="project-actions">
-                                <a href="https://github.com/TaroNukem/Portifolio" target="_blank" rel="noopener noreferrer" class="project-button">
+                                <a href="https://github.com/TaroNukem/Portifolio" target="_blank"
+                                   rel="noopener noreferrer" class="project-button">
                                     <i class="fa-brands fa-github"></i>
                                     <span th:text="#{projects.code}"></span>
                                 </a>
@@ -190,6 +199,27 @@
             </div>
         </div>
 
+        <div class="card skills" id="skills">
+            <h2>
+                <i class="fa-solid fa-code"></i>
+                <span th:text="#{skills.heading}"></span>
+            </h2>
+
+            <div class="skill-category">
+                <h3 th:text="#{skills.languages}"></h3>
+                <div class="skill-tags">
+                    <span>Java</span><span>Spring Boot</span><span>Python</span><span>HTML5</span><span>CSS3</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 th:text="#{skills.tools}"></h3>
+                <div class="skill-tags">
+                    <span>Git</span><span>VS Code</span><span>IntelliJ IDEA</span><span>PyCharm</span>
+                </div>
+            </div>
+        </div>
+
         <div class="card languages">
             <h2 class="activity-header">
                 <span class="activity-title">
@@ -221,27 +251,6 @@
                     </div>
                 </article>
                 <p class="activity-empty" th:if="${waka.linguagens.isEmpty()}" th:text="#{languages.empty}"></p>
-            </div>
-        </div>
-
-        <div class="card skills" id="skills">
-            <h2>
-                <i class="fa-solid fa-code"></i>
-                <span th:text="#{skills.heading}"></span>
-            </h2>
-
-            <div class="skill-category">
-                <h3 th:text="#{skills.languages}"></h3>
-                <div class="skill-tags">
-                    <span>Java</span><span>Spring Boot</span><span>Python</span><span>HTML5</span><span>CSS3</span>
-                </div>
-            </div>
-
-            <div class="skill-category">
-                <h3 th:text="#{skills.tools}"></h3>
-                <div class="skill-tags">
-                    <span>Git</span><span>VS Code</span><span>IntelliJ IDEA</span><span>PyCharm</span>
-                </div>
             </div>
         </div>
 
@@ -319,7 +328,8 @@
                 <a href="https://github.com/TaroNukem" target="_blank" rel="noopener noreferrer" class="contato-botao">
                     <i class="fa-brands fa-github"></i> GitHub
                 </a>
-                <a href="https://www.linkedin.com/in/daniel-rolando-22061137a" target="_blank" rel="noopener noreferrer" class="contato-botao">
+                <a href="https://www.linkedin.com/in/daniel-rolando-22061137a" target="_blank" rel="noopener noreferrer"
+                   class="contato-botao">
                     <i class="fa-brands fa-linkedin"></i> LinkedIn
                 </a>
                 <a href="mailto:danielgomesrolando@gmail.com" class="contato-botao">
@@ -370,8 +380,10 @@
         <div class="footer-column">
             <h3 th:text="#{footer.connect}"></h3>
             <div class="footer-socials">
-                <a href="https://github.com/TaroNukem" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/daniel-rolando-22061137a" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com/TaroNukem" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i
+                        class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/daniel-rolando-22061137a" target="_blank" rel="noopener noreferrer"
+                   aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
                 <a href="mailto:danielgomesrolando@gmail.com" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
             </div>
         </div>
@@ -461,7 +473,7 @@
             closeProfileMenu();
 
             try {
-                const response = await fetch(link.href, { credentials: 'same-origin' });
+                const response = await fetch(link.href, {credentials: 'same-origin'});
                 if (!response.ok) throw new Error('Erro ' + response.status);
 
                 const doc = new DOMParser().parseFromString(await response.text(), 'text/html');
