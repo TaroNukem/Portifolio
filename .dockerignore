@@ -1,0 +1,9 @@
+# Git e arquivos da IDE
+.git
+.idea
+.vscode
+
+# Arquivos locais e temporários
+.env
+*.log
+target
