@@ -1569,7 +1569,7 @@ img, video {
 
 @font-face {
     font-family: "Monocraft";
-    src: url("../fonts/monocraft.ttf") format("truetype");
+    src: url("../fonts/monocraft.otf") format("opentype");
     font-display: swap;
 }
 
