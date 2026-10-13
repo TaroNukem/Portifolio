@@ -1,8 +1,10 @@
 package com.portifolio.daniel.controllers;
 
 import com.portifolio.daniel.model.GitHubUser;
+import com.portifolio.daniel.service.FraseService;
 import com.portifolio.daniel.service.GitHubService;
 import com.portifolio.daniel.service.WakaTimeService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,14 +14,18 @@ public class DanielController {
 
     private final GitHubService gitHubService;
     private final WakaTimeService wakaTimeService;
+    private final FraseService fraseService;
 
-    public DanielController(GitHubService gitHubService, WakaTimeService wakaTimeService) {
+    public DanielController(GitHubService gitHubService,
+                            WakaTimeService wakaTimeService,
+                            FraseService fraseService) {
         this.gitHubService = gitHubService;
         this.wakaTimeService = wakaTimeService;
+        this.fraseService = fraseService;
     }
 
     @GetMapping("/")
-    public String profile(Model model) {
+    public String profile(Model model, HttpSession session) {
         GitHubUser github;
 
         try {
@@ -39,6 +45,7 @@ public class DanielController {
 
         model.addAttribute("github", github);
         model.addAttribute("waka", wakaTimeService.buscarResumo());
+        model.addAttribute("frase", fraseService.sortear(session));
 
         return "index";
     }

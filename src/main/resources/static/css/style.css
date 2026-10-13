@@ -1562,3 +1562,43 @@ img, video {
 @media (max-width: 600px) {
     .avatar-frame { --size: 150px; }
 }
+
+@font-face {
+    font-family: "Monocraft";
+    src: url("../fonts/monocraft.ttf") format("truetype");
+    font-display: swap;
+}
+
+.splash-text {
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    top: calc(100% + 26px);
+    width: max-content;
+    max-width: 240px;
+    text-align: center;
+    font-family: "Monocraft", "Courier New", monospace;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #ffff00;
+    -webkit-text-stroke: 4px #2a2a00;
+    paint-order: stroke fill;
+    text-shadow: 3px 3px 0 #2a2a00;
+    transform: translateX(-50%) rotate(-6deg);
+    pointer-events: none;
+    animation: splash-pulse 0.8s ease-in-out infinite;
+}
+
+@keyframes splash-pulse {
+    0%, 100% { transform: translateX(-50%) rotate(-6deg) scale(1); }
+    50%      { transform: translateX(-50%) rotate(-6deg) scale(1.1); }
+}
+
+@media (max-width: 600px) {
+    .avatar-frame { margin-bottom: 70px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .splash-text { animation: none; }
+}

@@ -88,6 +88,7 @@
 
         <div class="card bio-foto" id="profile">
             <div class="avatar-frame">
+                <span class="splash-text" th:text="${frase}"></span>
                 <img class="avatar-photo" th:src="@{/images/fotoPerfil.gif}" th:alt="#{profile.photo.alt}">
                 <img class="avatar-frame-overlay" th:src="@{/images/moldura.png}" alt="" aria-hidden="true">
             </div>
