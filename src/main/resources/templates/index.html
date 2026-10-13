@@ -87,7 +87,10 @@
     <div class="esquerda">
 
         <div class="card bio-foto" id="profile">
-            <img th:src="@{/images/fotoPerfil.gif}" th:alt="#{profile.photo.alt}">
+            <div class="avatar-frame">
+                <img class="avatar-photo" th:src="@{/images/fotoPerfil.gif}" th:alt="#{profile.photo.alt}">
+                <img class="avatar-frame-overlay" th:src="@{/images/moldura.png}" alt="" aria-hidden="true">
+            </div>
 
             <div class="info">
                 <h1>Daniel Rolando</h1>
