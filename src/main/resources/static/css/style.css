@@ -1657,3 +1657,114 @@ img, video {
     height: auto;
     margin: 0 auto;
 }
+
+/* ===== Formulário de contato (modal) ===== */
+
+button.contato-botao {
+    width: 100%;
+    font: inherit;
+    cursor: pointer;
+}
+
+.contact-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 13px 14px;
+    color: var(--text-ui);
+    background-color: var(--bg-button);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.3s var(--ease-out),
+    box-shadow 0.3s var(--ease-out),
+    background-color 0.3s var(--ease-out);
+}
+
+.contact-form textarea {
+    min-height: 130px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: var(--text-muted);
+    opacity: 0.8;
+}
+
+.contact-form input:hover,
+.contact-form textarea:hover {
+    border-color: var(--accent);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background-color: var(--bg-hover);
+    box-shadow: var(--glow);
+}
+
+.contact-form .contato-botao {
+    margin-top: 4px;
+    padding: 14px 18px;
+    color: #ffffff;
+    background-color: var(--accent);
+    border-color: var(--accent);
+    font-weight: 700;
+}
+
+@media (hover: hover) {
+    .contact-form .contato-botao:hover {
+        background-color: #3db0ff;
+        border-color: #3db0ff;
+    }
+}
+
+.contact-form .contato-botao:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.contact-feedback {
+    min-height: 1.2em;
+    margin: 0;
+    font-size: 14px;
+    text-align: center;
+}
+
+.contact-feedback.success {
+    color: #4ade80;
+}
+
+.contact-feedback.error {
+    color: #f87171;
+}
+
+/* campo armadilha anti-bot: invisível para humanos */
+.hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (max-width: 600px) {
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 16px;
+    }
+}

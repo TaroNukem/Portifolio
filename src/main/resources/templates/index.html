@@ -76,6 +76,29 @@
     </div>
 </div>
 
+<div class="pix-modal" id="contactModal" hidden>
+    <div class="pix-modal-content" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+        <button type="button" class="pix-close-button" id="closeContactButton" th:aria-label="#{pix.close}">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <i class="fa-solid fa-envelope pix-title-icon"></i>
+        <h2 id="contactModalTitle" th:text="#{contact.form.title}">Envie uma mensagem</h2>
+
+        <form id="contactForm" class="contact-form" novalidate th:attr="data-network-error=#{contact.form.network}">
+            <input type="text" name="nome" th:placeholder="#{contact.form.name}" required maxlength="100">
+            <input type="email" name="email" th:placeholder="#{contact.form.email}" required maxlength="150">
+            <textarea name="mensagem" rows="5" th:placeholder="#{contact.form.message}" required maxlength="2000"></textarea>
+            <!-- honeypot anti-spam: humanos não veem -->
+            <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off">
+            <button type="submit" class="contato-botao" id="contactSubmit">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span th:text="#{contact.form.send}">Enviar</span>
+            </button>
+            <p class="contact-feedback" id="contactFeedback" role="status"></p>
+        </form>
+    </div>
+</div>
+
 <video class="video-background" autoplay muted loop playsinline>
     <source th:src="@{/videos/fundo.mp4}" type="video/mp4">
 </video>
@@ -336,9 +359,9 @@
                    class="contato-botao">
                     <i class="fa-brands fa-linkedin"></i> LinkedIn
                 </a>
-                <a href="mailto:danielgomesrolando@gmail.com" class="contato-botao">
+                <button type="button" class="contato-botao" id="openContactButton">
                     <i class="fa-solid fa-envelope"></i> Email
-                </a>
+                </button>
                 <a th:href="@{/files/curriculo.pdf}" target="_blank" rel="noopener noreferrer" class="contato-botao">
                     <i class="fa-solid fa-file-lines"></i>
                     <span th:text="#{contact.resume}"></span>
@@ -408,125 +431,7 @@
 
 </footer>
 
-<script>
-    const profileMenuButton = document.getElementById('profileMenuButton');
-    const profileDropdown = document.getElementById('profileDropdown');
-    const languageMenuButton = document.getElementById('languageMenuButton');
-    const languageSubmenu = document.getElementById('languageSubmenu');
-    const openPixButton = document.getElementById('openPixButton');
-    const pixModal = document.getElementById('pixModal');
-    const closePixButton = document.getElementById('closePixButton');
-
-    function closeLanguageMenu() {
-        languageSubmenu.hidden = true;
-        languageMenuButton.setAttribute('aria-expanded', 'false');
-    }
-
-    function closeProfileMenu() {
-        profileDropdown.hidden = true;
-        profileMenuButton.setAttribute('aria-expanded', 'false');
-        closeLanguageMenu();
-    }
-
-    function closePixModal() {
-        pixModal.hidden = true;
-        openPixButton.focus();
-    }
-
-    profileMenuButton.addEventListener('click', () => {
-        if (profileDropdown.hidden) {
-            profileDropdown.hidden = false;
-            profileMenuButton.setAttribute('aria-expanded', 'true');
-        } else {
-            closeProfileMenu();
-        }
-    });
-
-    languageMenuButton.addEventListener('click', () => {
-        const isOpen = !languageSubmenu.hidden;
-        languageSubmenu.hidden = isOpen;
-        languageMenuButton.setAttribute('aria-expanded', String(!isOpen));
-    });
-
-    openPixButton.addEventListener('click', () => {
-        pixModal.hidden = false;
-        closeProfileMenu();
-        closePixButton.focus();
-    });
-
-    closePixButton.addEventListener('click', closePixModal);
-
-    pixModal.addEventListener('click', event => {
-        if (event.target === pixModal) closePixModal();
-    });
-
-    document.addEventListener('click', event => {
-        if (!event.target.closest('.profile-menu')) closeProfileMenu();
-    });
-
-    document.addEventListener('keydown', event => {
-        if (event.key === 'Escape') {
-            closeProfileMenu();
-            if (!pixModal.hidden) closePixModal();
-        }
-    });
-
-    // ===== Troca de idioma sem recarregar a página =====
-    function syncTexts(current, next) {
-        if (current.nodeType !== Node.ELEMENT_NODE) return;
-        if (current.tagName === 'SCRIPT' || current.tagName === 'VIDEO') return;
-
-        ['alt', 'aria-label', 'title'].forEach(attr => {
-            if (next.hasAttribute(attr) && current.getAttribute(attr) !== next.getAttribute(attr)) {
-                current.setAttribute(attr, next.getAttribute(attr));
-            }
-        });
-
-        if (current.classList.contains('language-option')) {
-            current.className = next.className;
-        }
-
-        const currentNodes = current.childNodes;
-        const nextNodes = next.childNodes;
-        if (currentNodes.length !== nextNodes.length) return;
-
-        for (let i = 0; i < currentNodes.length; i++) {
-            const a = currentNodes[i];
-            const b = nextNodes[i];
-            if (a.nodeType === Node.TEXT_NODE && b.nodeType === Node.TEXT_NODE) {
-                if (a.nodeValue !== b.nodeValue) a.nodeValue = b.nodeValue;
-            } else {
-                syncTexts(a, b);
-            }
-        }
-    }
-
-    async function switchLanguage(url) {
-        const response = await fetch(url, {credentials: 'same-origin'});
-        if (!response.ok) throw new Error('Falha ao trocar idioma');
-
-        const html = await response.text();
-        const newDoc = new DOMParser().parseFromString(html, 'text/html');
-
-        document.documentElement.lang = newDoc.documentElement.lang;
-        document.title = newDoc.title;
-        syncTexts(document.body, newDoc.body);
-    }
-
-    document.querySelectorAll('.language-option').forEach(link => {
-        link.addEventListener('click', async event => {
-            event.preventDefault();
-            const url = link.href;
-            try {
-                await switchLanguage(url);
-                closeProfileMenu();
-            } catch (error) {
-                window.location.href = url;
-            }
-        });
-    });
-
-</script>
+<script th:src="@{/js/script.js}"></script>
 
 </body>
 </html>
