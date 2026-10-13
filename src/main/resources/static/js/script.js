@@ -149,48 +149,57 @@ const contactForm = document.getElementById('contactForm')
 const contactFeedback = document.getElementById('contactFeedback')
 const contactSubmit = document.getElementById('contactSubmit')
 
-function closeContactModal(){
+function resetContactModal() {
+    contactForm.reset()
+    contactFeedback.textContent = ''
+    contactFeedback.className = 'contact-feedback'
+    contactSubmit.disabled = false
+}
+
+function closeContactModal() {
     contactModal.hidden = true
+    resetContactModal()
     openContactButton.focus()
 }
 
-openContactButton.addEventListener('click', () =>{
+openContactButton.addEventListener('click', () => {
+    resetContactModal()
     contactModal.hidden = false
     contactForm.elements.nome.focus()
 })
 
 closeContactButton.addEventListener('click', closeContactModal)
-contactModal.addEventListener('click', e =>{
-    if(e.target === contactModal) closeContactModal()
+
+contactModal.addEventListener('click', e => {
+    if (e.target === contactModal) closeContactModal()
 })
 
-document.addEventListener('keydown', e =>{
-    if(e.key === 'Escape' && !contactModal.hidden) closeContactModal()
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !contactModal.hidden) closeContactModal()
 })
 
-contactForm.addEventListener('submit', async e =>{
+contactForm.addEventListener('submit', async e => {
     e.preventDefault()
-    if(!contactForm.reportValidity()) return
+    if (!contactForm.reportValidity()) return
 
     contactSubmit.disabled = true
     contactFeedback.className = 'contact-feedback'
     contactFeedback.textContent = '...'
 
-    try{
-        const response = await fetch('/contato',{
+    try {
+        const response = await fetch('/contato', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.fromEntries(new FormData(contactForm)))
         })
         const data = await response.json()
         contactFeedback.textContent = data.message
         contactFeedback.classList.add(response.ok ? 'success' : 'error')
-        if(response.ok) contactForm.reset()
+        if (response.ok) contactForm.reset()
     } catch (err) {
-        contactFeedback.textContent = contactForm.dataset.networkError;
-        contactFeedback.classList.add('error');
-    }
-    finally {
+        contactFeedback.textContent = contactForm.dataset.networkError
+        contactFeedback.classList.add('error')
+    } finally {
         contactSubmit.disabled = false
     }
 })
