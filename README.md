@@ -1,23 +1,33 @@
 # Portfólio Pessoal — Daniel Rolando
 
-Portfólio pessoal desenvolvido com Java e Spring Boot para apresentar minha trajetória acadêmica, minhas habilidades e meus projetos na área de tecnologia. O projeto também integra serviços externos para exibir informações do GitHub e estatísticas de programação do WakaTime.
+Portfólio pessoal desenvolvido com **Java** e **Spring Boot** para apresentar minha trajetória acadêmica, minhas habilidades e meus projetos na área de tecnologia. A aplicação integra serviços externos para exibir informações do GitHub, estatísticas de programação do WakaTime e um formulário de contato com envio de e-mail.
 
-## Demonstração
+🔗 **Demonstração:** [portifolio-r27e.onrender.com](https://portifolio-r27e.onrender.com/)
 
-- **GitHub:** [TaroNukem](https://github.com/TaroNukem)
-
-https://portifolio-r27e.onrender.com/
+> O site está hospedado no plano gratuito do Render, então o primeiro acesso pode demorar alguns segundos enquanto o servidor "acorda".
 
 ## Funcionalidades
 
 - Apresentação pessoal e acadêmica.
 - Exibição de habilidades e informações profissionais.
 - Integração com a API do GitHub para obter informações do perfil.
-- Exibição de estatísticas de programação utilizando a API do WakaTime.
+- Estatísticas de programação com a API do WakaTime.
 - Resumo das linguagens de programação utilizadas.
+- Formulário de contato em modal, com envio de e-mail via Resend.
 - Disponibilização do currículo para consulta.
-- Suporte a português e inglês.
+- Suporte a português e inglês, com troca de idioma sem recarregar a página.
 - Interface personalizada com recursos visuais, imagens e vídeo de fundo.
+
+## Capturas de tela
+
+### Página inicial
+
+![Página inicial do portfólio](docs/screenshots/home.png)
+
+### Estatísticas e informações
+
+![Estatísticas do GitHub e WakaTime](docs/screenshots/estatisticas.png)
+![Seção de habilidades e projetos](docs/screenshots/habilidades.png)
 
 ## Tecnologias utilizadas
 
@@ -26,13 +36,14 @@ https://portifolio-r27e.onrender.com/
 | Java | Linguagem principal |
 | Spring Boot | Estrutura da aplicação web |
 | Thymeleaf | Renderização das páginas HTML |
-| HTML5 | Estrutura das páginas |
-| CSS3 | Estilização e layout |
-| JavaScript | Recursos interativos da interface |
-| Git e GitHub | Versionamento e hospedagem do código |
+| HTML5 e CSS3 | Estrutura, estilização e layout |
+| JavaScript | Recursos interativos (modais, menu, troca de idioma, formulário) |
+| Maven | Gerenciamento de dependências e execução do projeto |
 | GitHub API | Consulta de informações do perfil |
 | WakaTime API | Consulta de estatísticas de programação |
-| Maven | Gerenciamento de dependências e execução do projeto |
+| Resend | Envio de e-mails do formulário de contato |
+| Render | Hospedagem e deploy |
+| Git e GitHub | Versionamento e hospedagem do código |
 
 ## Estrutura do projeto
 
@@ -49,6 +60,7 @@ daniel/
 │   │   │   │   ├── GitHubUser.java
 │   │   │   │   └── WakaTimeResumo.java
 │   │   │   ├── service/
+│   │   │   │   ├── EmailService.java
 │   │   │   │   ├── GitHubService.java
 │   │   │   │   └── WakaTimeService.java
 │   │   │   └── DanielApplication.java
@@ -65,6 +77,8 @@ daniel/
 │   │       │   └── index.html
 │   │       └── application.properties
 │   └── test/
+├── docs/
+│   └── screenshots/
 ├── .mvn/
 ├── mvnw
 ├── mvnw.cmd
@@ -76,31 +90,45 @@ daniel/
 
 ### Pré-requisitos
 
-- Java compatível com a versão configurada no projeto.
+- Java na versão configurada no `pom.xml`.
 - Git.
 - Acesso à internet para consultar as APIs externas.
+- Chaves de API do WakaTime e do Resend (e, opcionalmente, um token do GitHub).
 
 ### 1. Clone o repositório
 
 ```bash
 git clone https://github.com/TaroNukem/Portifolio.git
-```
-
-### 2. Entre na pasta do projeto
-
-```bash
 cd Portifolio
 ```
 
-### 3. Configure as credenciais
+### 2. Configure as variáveis de ambiente
 
-Configure as credenciais necessárias para as integrações com o GitHub e o WakaTime conforme as propriedades utilizadas pela aplicação.
+A aplicação lê as credenciais de variáveis de ambiente. **Nunca** coloque chaves direto no código ou no repositório.
 
-Mantenha chaves de API e outros dados sensíveis em configurações locais ou variáveis de ambiente. Não publique essas credenciais no repositório.
+| Variável | Descrição |
+|---|---|
+| `RESEND_API_KEY` | Chave da API do Resend, usada no envio do formulário de contato |
+| `WAKATIME_API_KEY` | Chave da API do WakaTime |
+| `GITHUB_TOKEN` | Token do GitHub (opcional, evita limite de requisições) |
 
-### 4. Execute a aplicação
+No Windows (PowerShell):
 
-No Windows, utilizando o Maven Wrapper:
+```powershell
+$env:RESEND_API_KEY="sua_chave"
+$env:WAKATIME_API_KEY="sua_chave"
+```
+
+No Linux ou macOS:
+
+```bash
+export RESEND_API_KEY="sua_chave"
+export WAKATIME_API_KEY="sua_chave"
+```
+
+### 3. Execute a aplicação
+
+No Windows:
 
 ```powershell
 .\mvnw.cmd spring-boot:run
@@ -112,31 +140,20 @@ No Linux ou macOS:
 ./mvnw spring-boot:run
 ```
 
-### 5. Acesse o portfólio
-
-Abra o navegador e acesse:
+### 4. Acesse o portfólio
 
 ```text
 http://localhost:8080
 ```
 
-## Capturas de tela
+## Deploy
 
-<!-- Adicione capturas reais da interface nesta seção. -->
-
-### Página inicial
-
-![img.png](img.png)
-
-### Estatísticas e informações
-
-![img_1.png](img_1.png)
-![img_2.png](img_2.png)
+O projeto é publicado no [Render](https://render.com) como Web Service. As mesmas variáveis de ambiente da seção anterior são cadastradas na aba **Environment** do serviço.
 
 ## Objetivos do projeto
 
 - Aplicar conhecimentos de desenvolvimento web com Java e Spring Boot.
-- Praticar a organização de uma aplicação utilizando controllers, models e services.
+- Organizar uma aplicação em controllers, models e services.
 - Trabalhar com APIs externas e consumo de dados.
 - Implementar internacionalização de conteúdo.
 - Desenvolver e aprimorar uma interface web personalizada.
