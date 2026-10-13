@@ -1616,3 +1616,33 @@ img, video {
         animation: none;
     }
 }
+
+.top-languages {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background: rgba(15, 12, 24, 1);
+    border: 1px solid rgba(102, 192, 244, 0.15);
+    border-radius: 5px;
+    transition: border-color 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+@media (hover: hover) {
+    .top-languages:hover {
+        border-color: var(--accent);
+        box-shadow: var(--glow);
+    }
+}
+
+.top-languages a {
+    display: block;
+    width: 100%;
+}
+
+.top-languages img {
+    display: block;
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    margin: 0 auto;
+}
