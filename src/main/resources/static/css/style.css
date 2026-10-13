@@ -1556,11 +1556,15 @@ img, video {
 }
 
 @media (max-width: 900px) {
-    .avatar-frame { --size: 160px; }
+    .avatar-frame {
+        --size: 160px;
+    }
 }
 
 @media (max-width: 600px) {
-    .avatar-frame { --size: 150px; }
+    .avatar-frame {
+        --size: 150px;
+    }
 }
 
 @font-face {
@@ -1568,6 +1572,7 @@ img, video {
     src: url("../fonts/monocraft.ttf") format("truetype");
     font-display: swap;
 }
+
 
 .splash-text {
     position: absolute;
@@ -1585,20 +1590,29 @@ img, video {
     -webkit-text-stroke: 4px #2a2a00;
     paint-order: stroke fill;
     text-shadow: 3px 3px 0 #2a2a00;
-    transform: translateX(-50%) rotate(-6deg);
+    transform-origin: center;
     pointer-events: none;
-    animation: splash-pulse 0.8s ease-in-out infinite;
+    animation: splash-pulse 0.8s ease-in-out infinite !important;
 }
 
 @keyframes splash-pulse {
-    0%, 100% { transform: translateX(-50%) rotate(-6deg) scale(1); }
-    50%      { transform: translateX(-50%) rotate(-6deg) scale(1.1); }
+    0%, 100% {
+        transform: translateX(-50%) scale(1);
+    }
+
+    50% {
+        transform: translateX(-50%) scale(1.08);
+    }
 }
 
 @media (max-width: 600px) {
-    .avatar-frame { margin-bottom: 70px; }
+    .avatar-frame {
+        margin-bottom: 70px;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .splash-text { animation: none; }
+    .splash-text {
+        animation: none;
+    }
 }
