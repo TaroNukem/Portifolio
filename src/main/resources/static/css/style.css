@@ -1768,3 +1768,33 @@ button.contato-botao {
         font-size: 16px;
     }
 }
+
+.project-grid {
+    max-height: 760px;          /* altura visível; ajuste ao gosto */
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
+}
+
+.project-grid::-webkit-scrollbar {
+    width: 8px;
+}
+
+.project-grid::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.project-grid::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 4px;
+}
+
+@media (max-width: 700px) {
+    .project-grid {
+        max-height: 600px;
+    }
+}
+
