@@ -1798,3 +1798,7 @@ button.contato-botao {
     }
 }
 
+.activity-banner.lang-typescript {
+    background: #3178c6;
+    color: #fff;
+}

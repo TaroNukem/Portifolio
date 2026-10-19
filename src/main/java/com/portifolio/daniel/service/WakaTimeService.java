@@ -28,7 +28,8 @@ public class WakaTimeService {
             "java", new String[]{"lang-java", "fa-brands fa-java"},
             "html", new String[]{"lang-html", "fa-brands fa-html5"},
             "python", new String[]{"lang-python", "fa-brands fa-python"},
-            "javascript", new String[]{"lang-javascript", "fa-brands fa-js"}
+            "javascript", new String[]{"lang-javascript", "fa-brands fa-js"},
+            "typescript", new String[]{"lang-typescript", "devicon-typescript-plain"}
     );
 
     private final RestTemplate restTemplate = new RestTemplate();
